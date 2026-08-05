@@ -11,19 +11,14 @@ function openInvitation() {
 
     const envelope = document.querySelector(".envelope");
     const card = document.querySelector(".invite-card");
+    const gate = document.getElementById("openingGate");
 
     if (!envelope || envelope.classList.contains("opening")) {
         return;
     }
 
-    // Remember to autoplay music on the invitation page
-    try {
-        sessionStorage.setItem("weddingPlayMusic", "1");
-    } catch (e) {
-        // ignore storage errors
-    }
-
-    // Start music on the open click (allowed by browser gesture rules)
+    // Best sync: start music in the SAME click that opens the invitation
+    // (no page change, so the song never cuts)
     playWeddingMusic();
 
     envelope.classList.add("opening");
@@ -44,8 +39,26 @@ function openInvitation() {
     }, 900);
 
     setTimeout(function () {
-        window.location.href = "invitation.html";
-    }, 1700);
+        document.body.classList.remove("invitation-locked");
+        document.body.classList.add("invitation-open");
+
+        if (gate) {
+            gate.classList.add("is-hidden");
+        }
+
+        const toggle = document.getElementById("musicToggle");
+        if (toggle) {
+            toggle.hidden = false;
+        }
+
+        // Remove gate after fade so it cannot block the page
+        setTimeout(function () {
+            if (gate) {
+                gate.remove();
+            }
+            window.scrollTo(0, 0);
+        }, 700);
+    }, 1500);
 }
 
 
@@ -302,23 +315,8 @@ function initWeddingMusic() {
         toggle.addEventListener("click", toggleMusic);
     }
 
-    // On the invitation page, autoplay by default
-    if (!document.body.classList.contains("wedding-page")) {
-        return;
-    }
-
-    playWeddingMusic().then(function (started) {
-        if (!started) {
-            // Some browsers block autoplay until a tap
-            unlockMusicOnFirstGesture();
-        }
-    });
-
-    try {
-        sessionStorage.removeItem("weddingPlayMusic");
-    } catch (e) {
-        // ignore
-    }
+    // Music starts when the envelope is opened (same moment as reveal).
+    // Do not autoplay on load — that is often blocked and can desync.
 }
 
 

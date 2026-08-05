@@ -529,31 +529,6 @@ body:not(.wedding-page) {
 }
 
 
-.seal::before {
-
-    content: "M&S";
-
-    position: absolute;
-
-    inset: 0;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    color: #fff2b8;
-
-    font-family: 'Cormorant Garamond', serif;
-
-    font-size: 14px;
-
-    font-weight: 600;
-
-    letter-spacing: 0.5px;
-}
-
 
 /* Guest message */
 
@@ -674,6 +649,88 @@ body:not(.wedding-page) {
     line-height: 1.7;
 
     overflow-x: hidden;
+}
+
+
+/* Opening gate: envelope + music start together (no page jump) */
+
+.wedding-page.invitation-locked {
+    overflow: hidden;
+    height: 100vh;
+    height: 100dvh;
+}
+
+
+.opening-gate {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 100;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background:
+        linear-gradient(
+            rgba(0, 0, 0, 0.35),
+            rgba(0, 0, 0, 0.5)
+        ),
+        url("images/jw.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    transition:
+        opacity 0.7s ease,
+        visibility 0.7s ease;
+}
+
+
+.opening-gate.is-hidden {
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+}
+
+
+.opening-gate .container {
+
+    min-height: auto;
+}
+
+
+.opening-gate .floating-petals {
+
+    z-index: 101;
+}
+
+
+.invitation-content {
+
+    opacity: 0;
+
+    transition: opacity 0.8s ease 0.15s;
+}
+
+
+.wedding-page.invitation-open .invitation-content {
+
+    opacity: 1;
+}
+
+
+.music-toggle[hidden] {
+
+    display: none !important;
 }
 
 :root {

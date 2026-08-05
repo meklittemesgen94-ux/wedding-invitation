@@ -1341,11 +1341,59 @@ body:not(.wedding-page) {
 }
 
 
-.location-section > p:not(.section-label) {
+.location-name {
 
-    margin-bottom: 25px;
+    font-family: 'Cormorant Garamond', serif;
+
+    font-size: 22px;
+
+    color: var(--navy, #263b5a);
+
+    margin-bottom: 8px;
+}
+
+
+.location-address {
 
     color: #666;
+
+    margin-bottom: 18px;
+
+    line-height: 1.6;
+}
+
+
+.map-directions {
+
+    display: inline-block;
+
+    margin-bottom: 28px;
+
+    padding: 10px 22px;
+
+    border: 1px solid rgba(201, 162, 74, 0.55);
+
+    color: var(--gold, #c9a24a);
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease;
+}
+
+
+.map-directions:hover {
+
+    background: var(--gold, #c9a24a);
+
+    color: white;
 }
 
 

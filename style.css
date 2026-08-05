@@ -675,24 +675,19 @@ body:not(.wedding-page) {
 
     align-items: center;
 
-    background:
-        linear-gradient(
-            rgba(8, 28, 58, 0.22),
-            rgba(8, 28, 58, 0.38)
-        ),
-        url("images/jw.jpg");
+    background: #1a2a40;
 
-    background-size: cover;
-
-    background-position: center;
-
-    background-repeat: no-repeat;
-
-    image-rendering: auto;
+    overflow: hidden;
 
     transition:
         opacity 0.7s ease,
         visibility 0.7s ease;
+}
+
+
+.opening-gate .container {
+    position: relative;
+    z-index: 2;
 }
 
 
@@ -714,7 +709,7 @@ body:not(.wedding-page) {
 
 .opening-gate .floating-petals {
 
-    z-index: 101;
+    z-index: 3;
 }
 
 
@@ -738,12 +733,48 @@ body:not(.wedding-page) {
 }
 
 :root {
+    color-scheme: light only;
     --navy: #263b5a;
     --navy-deep: #183c73;
     --gold: #c9a24a;
     --gold-soft: #e7c56a;
     --cream: #f7f1e7;
     --ink-soft: #5c6672;
+    /* Same shade on phone + desktop */
+    --photo-shade:
+        linear-gradient(
+            180deg,
+            rgba(8, 28, 58, 0.22) 0%,
+            rgba(8, 28, 58, 0.30) 50%,
+            rgba(8, 28, 58, 0.40) 100%
+        );
+}
+
+
+/* Shared photo layer — identical crop + shade on all screens */
+
+.photo-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+    z-index: 0;
+    pointer-events: none;
+    /* Stop mobile browsers from auto-darkening images */
+    filter: none;
+    -webkit-filter: none;
+}
+
+
+.photo-shade {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: var(--photo-shade);
 }
 
 
@@ -769,14 +800,7 @@ body:not(.wedding-page) {
 
     color: white;
 
-    background:
-        linear-gradient(
-            180deg,
-            rgba(8, 28, 58, 0.18) 0%,
-            rgba(8, 28, 58, 0.28) 50%,
-            rgba(8, 28, 58, 0.45) 100%
-        ),
-        url("images/jw.jpg") center / cover no-repeat;
+    background: #1a2a40;
 
     position: relative;
 
@@ -789,21 +813,9 @@ body:not(.wedding-page) {
 }
 
 
-.hero-veil {
-
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(8, 28, 58, 0.15) 0%,
-            rgba(8, 28, 58, 0.28) 45%,
-            rgba(8, 28, 58, 0.42) 100%
-        );
-
-    pointer-events: none;
+.wedding-hero .floral,
+.wedding-hero .scroll-cue {
+    z-index: 2;
 }
 
 
@@ -815,7 +827,7 @@ body:not(.wedding-page) {
 
     position: relative;
 
-    z-index: 2;
+    z-index: 3;
 
     will-change: transform, opacity;
 }
@@ -2197,7 +2209,7 @@ footer p {
 
     .floating-petals {
 
-        opacity: 0.7;
+        opacity: 0.55;
     }
 
     .floral-side {
@@ -2207,7 +2219,16 @@ footer p {
     .floral-hero-left,
     .floral-hero-right {
         width: 22vw;
-        opacity: 0.4;
+        opacity: 0.35;
+    }
+
+    /* Keep the same photo crop/shade as desktop */
+    .photo-bg {
+        object-position: center center;
+    }
+
+    .photo-shade {
+        background: var(--photo-shade);
     }
 
     .floral-corner {

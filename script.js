@@ -49,7 +49,11 @@ function openInvitation() {
         const toggle = document.getElementById("musicToggle");
         if (toggle) {
             toggle.hidden = false;
+            toggle.classList.add("is-playing");
         }
+
+        revealHeroNow();
+        initReveals();
 
         // Remove gate after fade so it cannot block the page
         setTimeout(function () {
@@ -123,28 +127,26 @@ setInterval(updateCountdown, 1000);
    FLOATING PETALS
    ===================================================== */
 
-function createPetals() {
+function fillPetalLayer(layer, count) {
 
-    const layer = document.querySelector(".floating-petals");
-
-    if (!layer) {
+    if (!layer || layer.dataset.filled === "1") {
         return;
     }
 
-    const count = window.innerWidth < 600 ? 12 : 22;
+    layer.dataset.filled = "1";
 
     for (let i = 0; i < count; i++) {
         const petal = document.createElement("span");
-        petal.className = "petal";
+        petal.className = "petal" + (i % 3 === 0 ? " petal-rose" : "");
 
-        const size = 8 + Math.random() * 10;
+        const size = 7 + Math.random() * 12;
         const left = Math.random() * 100;
-        const delay = Math.random() * 12;
-        const duration = 10 + Math.random() * 14;
-        const opacity = 0.25 + Math.random() * 0.45;
+        const delay = Math.random() * 14;
+        const duration = 11 + Math.random() * 16;
+        const opacity = 0.22 + Math.random() * 0.4;
 
         petal.style.width = size + "px";
-        petal.style.height = size * 0.7 + "px";
+        petal.style.height = size * 0.65 + "px";
         petal.style.left = left + "%";
         petal.style.animationDelay = delay + "s";
         petal.style.animationDuration = duration + "s";
@@ -154,14 +156,26 @@ function createPetals() {
     }
 }
 
+function createPetals() {
+
+    const gateLayer = document.querySelector('[data-petals="gate"]');
+    const pageLayer = document.querySelector('[data-petals="page"]');
+    const mobile = window.innerWidth < 600;
+
+    fillPetalLayer(gateLayer, mobile ? 10 : 18);
+    fillPetalLayer(pageLayer, mobile ? 8 : 14);
+}
+
 
 /* =====================================================
-   SCROLL REVEALS
+   SCROLL REVEALS — gentle appear on scroll
    ===================================================== */
+
+let revealObserver = null;
 
 function initReveals() {
 
-    const items = document.querySelectorAll(".reveal");
+    const items = document.querySelectorAll(".reveal:not([data-observe])");
 
     if (!items.length) {
         return;
@@ -174,25 +188,52 @@ function initReveals() {
         return;
     }
 
-    const observer = new IntersectionObserver(
-        function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("is-visible");
-                    observer.unobserve(entry.target);
-                }
-            });
-        },
-        {
-            threshold: 0.15,
-            rootMargin: "0px 0px -40px 0px"
-        }
-    );
+    if (!revealObserver) {
+        revealObserver = new IntersectionObserver(
+            function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-visible");
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            },
+            {
+                threshold: 0.12,
+                rootMargin: "0px 0px -8% 0px"
+            }
+        );
+    }
 
     items.forEach(function (item, index) {
-        item.style.transitionDelay = (index % 4) * 0.08 + "s";
-        observer.observe(item);
+        item.dataset.observe = "1";
+
+        // Stagger siblings in the same section gently
+        const siblings = item.parentElement
+            ? item.parentElement.querySelectorAll(":scope > .reveal")
+            : [];
+        let delay = 0;
+
+        if (siblings.length) {
+            const siblingIndex = Array.prototype.indexOf.call(siblings, item);
+            delay = Math.max(siblingIndex, 0) * 0.12;
+        } else {
+            delay = (index % 5) * 0.1;
+        }
+
+        item.style.transitionDelay = delay + "s";
+        revealObserver.observe(item);
     });
+}
+
+function revealHeroNow() {
+    document.querySelectorAll(".wedding-hero .reveal").forEach(
+        function (item, index) {
+            setTimeout(function () {
+                item.classList.add("is-visible");
+            }, 180 + index * 140);
+        }
+    );
 }
 
 
@@ -376,17 +417,8 @@ function initHeroParallax() {
 
 document.addEventListener("DOMContentLoaded", function () {
     createPetals();
-    initReveals();
     initWeddingMusic();
     initEnvelopeAccess();
     initHeroParallax();
-
-    // Hero content visible immediately on load
-    document.querySelectorAll(".wedding-hero .reveal").forEach(
-        function (item, index) {
-            setTimeout(function () {
-                item.classList.add("is-visible");
-            }, 200 + index * 160);
-        }
-    );
+    // Scroll reveals start after the envelope opens
 });

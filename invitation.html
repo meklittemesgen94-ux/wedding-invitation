@@ -3,23 +3,19 @@
 
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Medhanit & Samuel | Wedding</title>
-
     <link rel="stylesheet" href="style.css">
-
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 
 <body class="wedding-page invitation-locked">
 
-    <!-- OPENING GATE: music + invitation reveal happen together -->
+    <!-- OPENING GATE -->
     <div class="opening-gate" id="openingGate">
 
         <div class="background-overlay"></div>
-        <div class="floating-petals" aria-hidden="true"></div>
+        <div class="floating-petals" data-petals="gate" aria-hidden="true"></div>
 
         <div class="container">
             <div class="invite-card">
@@ -70,315 +66,356 @@
         <source src="audio/unfailing-love.mp3" type="audio/mpeg">
     </audio>
 
+    <!-- Soft petals over the invitation -->
+    <div class="floating-petals page-petals" data-petals="page" aria-hidden="true"></div>
+
     <div class="invitation-content" id="invitationContent">
 
-    <!-- HERO -->
-    <section class="wedding-hero">
+        <!-- HERO -->
+        <section class="wedding-hero">
 
-        <div class="hero-content">
-
-            <p class="small-title">
-                WE ARE GETTING MARRIED
-            </p>
-            <br>
-
-            <h1>
-                Medhanit
-             <span>&</span>
-                Samuel
-            </h1>
-
-            <p class="hero-date">
-                NOV 20, 2026
-            </p>
-
-            <div class="hero-line"></div>
-
-           <p>"He has made everything beautiful in its time."<br>
-                (Ecclesiastes 3:11)📖
-            </p>
-            <br>
-             <p class="hero-message">
-                We invite you to celebrate our love,
-                our friendship and the beginning of
-                our forever together.
-            </p>
-
-        </div>
-   
-    </section>
-
-
-    <!-- COUNTDOWN -->
-    <section class="wedding-section countdown-section">
-
-        <p class="section-label">
-            THE BIG DAY
-        </p>
-
-        <h2>
-            Counting Down to Forever
-        </h2>
-
-        <div class="timer">
-
-            <div class="time-box">
-                <span id="days">0</span>
-                <p>Days</p>
+            <div class="floral floral-hero-left" aria-hidden="true">
+                <svg viewBox="0 0 120 220" fill="none">
+                    <path d="M60 210 C40 160 20 140 28 100 C35 70 55 80 60 110 C65 80 85 70 92 100 C100 140 80 160 60 210Z" fill="currentColor" opacity="0.35"/>
+                    <circle cx="36" cy="72" r="14" fill="currentColor" opacity="0.45"/>
+                    <circle cx="88" cy="78" r="12" fill="currentColor" opacity="0.4"/>
+                    <circle cx="60" cy="48" r="16" fill="currentColor" opacity="0.5"/>
+                    <path d="M60 64 C48 90 52 130 60 160" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+                </svg>
             </div>
 
-            <div class="time-box">
-                <span id="hours">0</span>
-                <p>Hours</p>
+            <div class="floral floral-hero-right" aria-hidden="true">
+                <svg viewBox="0 0 120 220" fill="none">
+                    <path d="M60 210 C40 160 20 140 28 100 C35 70 55 80 60 110 C65 80 85 70 92 100 C100 140 80 160 60 210Z" fill="currentColor" opacity="0.35"/>
+                    <circle cx="36" cy="72" r="14" fill="currentColor" opacity="0.45"/>
+                    <circle cx="88" cy="78" r="12" fill="currentColor" opacity="0.4"/>
+                    <circle cx="60" cy="48" r="16" fill="currentColor" opacity="0.5"/>
+                    <path d="M60 64 C48 90 52 130 60 160" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+                </svg>
             </div>
 
-            <div class="time-box">
-                <span id="minutes">0</span>
-                <p>Minutes</p>
-            </div>
+            <div class="hero-content">
 
-            <div class="time-box">
-                <span id="seconds">0</span>
-                <p>Seconds</p>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- OUR STORY -->
-    <section class="wedding-section story-section">
-
-        <p class="section-label">
-            OUR STORY
-        </p>
-
-        <h2>
-            Two Hearts, One Story
-        </h2>
-
-        <p class="story-text">
-            Some stories are written in books,
-            but ours was written in the little
-            moments we shared together.
-
-            <br><br>
-
-            From childhood playmates to this
-            beautiful day, every moment has led
-            us here.
-
-            <br><br>
-
-            And now, we are ready to begin the
-            next chapter of our forever with Jehovah.
-            
-            <br><br>
-
-           AND NOW THESE THREE 
-           REMAIN: FAITH,HOPE,AND LOVE.
-           BUT THE GREATEST OF THESE IS LOVE.
-           <br>
-           (1 Corinthians 13:13)📖
-        </p>
-
-    </section>
-
-
-    <!-- WEDDING DETAILS -->
-    <section class="wedding-section details-section">
-
-        <p class="section-label">
-            JOIN US
-        </p>
-
-        <h2>
-            Wedding Details
-        </h2>
-
-        <div class="details-grid">
-
-            <div class="detail-card">
-
-                <div class="detail-icon">
-                    🏠
-                </div>
-
-                <h3>
-                    Wedding Ceremony
-                </h3>
-
-                <p>
-                    Addis Amba<br>
-                    JW Kingdom Hall
+                <p class="small-title reveal">
+                    We are getting married
                 </p>
 
-                <span>
-                    09:00 AM
-                </span>
+                <h1 class="reveal">
+                    Medhanit
+                    <span>&</span>
+                    Samuel
+                </h1>
 
-            </div>
-
-
-            <div class="detail-card">
-
-                <div class="detail-icon">
-                    🎉
-                </div>
-
-                <h3>
-                    Celebration
-                </h3>
-
-                <p>
-                    in the house
+                <p class="hero-date reveal">
+                    November 21, 2026
                 </p>
 
-                <span>
-                    12:00 PM
-                </span>
-
-            </div>
-
-
-            <div class="detail-card">
-
-                <div class="detail-icon">
-                    💻
+                <div class="floral-divider reveal" aria-hidden="true">
+                    <span></span>
+                    <svg viewBox="0 0 40 40" width="22" height="22">
+                        <path d="M20 4 C16 12 8 14 8 20 C8 26 14 28 20 36 C26 28 32 26 32 20 C32 14 24 12 20 4Z" fill="currentColor"/>
+                    </svg>
+                    <span></span>
                 </div>
 
-                <h3>
-                    Join us through
-                    Zoom Meeting
-                </h3>
-
-                <p>
-                    Zoom ID: 990 863 5436<br>
-                    PassCode:303030
+                <p class="hero-verse reveal">
+                    "He has made everything beautiful in its time."<br>
+                    <em>Ecclesiastes 3:11</em>
                 </p>
 
-                <span>
-                    09:00 AM
-                </span>
+                <p class="hero-message reveal">
+                    We invite you to celebrate our love,
+                    our friendship and the beginning of
+                    our forever together.
+                </p>
 
             </div>
 
-        </div>
+            <a href="#countdown" class="scroll-cue" aria-label="Scroll to details">
+                <span></span>
+            </a>
 
-    </section>
- <!-- GALLERY -->
-    <section class="wedding-section gallery-section">
+        </section>
 
-        <p class="section-label">
-            OUR MOMENTS
-        </p>
 
-        <h2>
-            Memories of Us
-        </h2>
+        <!-- COUNTDOWN -->
+        <section id="countdown" class="wedding-section countdown-section">
 
-        <div class="gallery">
+            <div class="floral floral-corner floral-tl" aria-hidden="true"></div>
+            <div class="floral floral-corner floral-tr" aria-hidden="true"></div>
 
-            <div class="gallery-item">
-                <img src="images/jw.jpg" alt="Wedding memory">
+            <p class="section-label reveal">The big day</p>
+
+            <h2 class="reveal">Counting Down to Forever</h2>
+
+            <div class="floral-divider reveal" aria-hidden="true">
+                <span></span>
+                <svg viewBox="0 0 40 40" width="18" height="18">
+                    <circle cx="20" cy="20" r="5" fill="currentColor"/>
+                    <circle cx="8" cy="14" r="4" fill="currentColor" opacity="0.7"/>
+                    <circle cx="32" cy="14" r="4" fill="currentColor" opacity="0.7"/>
+                    <circle cx="12" cy="28" r="4" fill="currentColor" opacity="0.7"/>
+                    <circle cx="28" cy="28" r="4" fill="currentColor" opacity="0.7"/>
+                </svg>
+                <span></span>
             </div>
 
-            <div class="gallery-item">
-                <img src="images/jw.jpg" alt="Wedding memory">
+            <div class="timer">
+                <div class="time-box reveal reveal-up">
+                    <span id="days">0</span>
+                    <p>Days</p>
+                </div>
+                <div class="time-box reveal reveal-up">
+                    <span id="hours">0</span>
+                    <p>Hours</p>
+                </div>
+                <div class="time-box reveal reveal-up">
+                    <span id="minutes">0</span>
+                    <p>Minutes</p>
+                </div>
+                <div class="time-box reveal reveal-up">
+                    <span id="seconds">0</span>
+                    <p>Seconds</p>
+                </div>
             </div>
 
-            <div class="gallery-item">
-                <img src="images/jw.jpg" alt="Wedding memory">
+        </section>
+
+
+        <!-- OUR STORY -->
+        <section class="wedding-section story-section">
+
+            <div class="floral floral-side floral-left reveal reveal-left" aria-hidden="true">
+                <svg viewBox="0 0 80 180" fill="none">
+                    <path d="M40 170 C20 120 10 90 22 55 C30 30 40 40 40 70 C40 40 50 30 58 55 C70 90 60 120 40 170Z" fill="currentColor"/>
+                    <circle cx="24" cy="40" r="10" fill="currentColor" opacity="0.85"/>
+                    <circle cx="56" cy="48" r="9" fill="currentColor" opacity="0.75"/>
+                    <circle cx="40" cy="22" r="11" fill="currentColor"/>
+                </svg>
             </div>
 
-            <div class="gallery-item">
-                <img src="images/jw.jpg" alt="Wedding memory">
+            <div class="floral floral-side floral-right reveal reveal-right" aria-hidden="true">
+                <svg viewBox="0 0 80 180" fill="none">
+                    <path d="M40 170 C20 120 10 90 22 55 C30 30 40 40 40 70 C40 40 50 30 58 55 C70 90 60 120 40 170Z" fill="currentColor"/>
+                    <circle cx="24" cy="40" r="10" fill="currentColor" opacity="0.85"/>
+                    <circle cx="56" cy="48" r="9" fill="currentColor" opacity="0.75"/>
+                    <circle cx="40" cy="22" r="11" fill="currentColor"/>
+                </svg>
             </div>
 
-        </div>
+            <p class="section-label reveal">Our story</p>
 
-    </section>
+            <h2 class="reveal">Two Hearts, One Story</h2>
 
+            <div class="floral-divider reveal" aria-hidden="true">
+                <span></span>
+                <svg viewBox="0 0 40 40" width="18" height="18">
+                    <path d="M20 4 C16 12 8 14 8 20 C8 26 14 28 20 36 C26 28 32 26 32 20 C32 14 24 12 20 4Z" fill="currentColor"/>
+                </svg>
+                <span></span>
+            </div>
 
-    <!-- LOCATION -->
-    <section class="wedding-section location-section">
-
-        <p class="section-label">
-            FIND US
-        </p>
-
-        <h2>
-            Wedding Location
-        </h2>
-
-        <p>
-            Addis Amba JW Kingdom Hall
-        </p>
-
-        <div class="map-container">
-
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18..."
-                allowfullscreen=""
-                loading="lazy">
-            </iframe>
-
-        </div>
-
-    </section>
-
-
-    <!-- RSVP -->
-    <section class="wedding-section rsvp-section">
-
-        <p class="section-label">
-            YOUR PRESENCE MEANS EVERYTHING
-        </p>
-
-            <h2>
-                Will You Join Us?
-            </h2>
-
-            <p>
-                Please let us know if you will be
-                celebrating with us.
+            <p class="story-text reveal">
+                Some stories are written in books,
+                but ours was written in the little
+                moments we shared together.
             </p>
 
-        <a
-            class="rsvp-button"
-            href="https://wa.me/2519XXXXXXXX"
-            target="_blank">
+            <p class="story-text reveal">
+                From childhood playmates to this
+                beautiful day, every moment has led
+                us here.
+            </p>
 
-            Confirm RSVP
+            <p class="story-text reveal">
+                And now, we are ready to begin the
+                next chapter of our forever with Jehovah.
+            </p>
 
-        </a>
+            <blockquote class="story-verse reveal">
+                <p>
+                    And now these three remain: faith, hope, and love.
+                    But the greatest of these is love.
+                </p>
+                <cite>1 Corinthians 13:13</cite>
+            </blockquote>
 
-    </section>
+        </section>
 
 
-    <!-- FOOTER -->
-    <footer>
+        <!-- WEDDING DETAILS -->
+        <section class="wedding-section details-section">
 
-        <h2>
-            Medhanit & Samuel
-        </h2>
+            <p class="section-label reveal">Join us</p>
 
-        <p>
-            NOV 21, 2026
-        </p>
+            <h2 class="reveal">Wedding Details</h2>
 
-        <div class="footer-heart">
-            ♡
-        </div>
+            <div class="floral-divider reveal" aria-hidden="true">
+                <span></span>
+                <svg viewBox="0 0 40 40" width="18" height="18">
+                    <circle cx="20" cy="20" r="5" fill="currentColor"/>
+                    <circle cx="8" cy="14" r="4" fill="currentColor" opacity="0.7"/>
+                    <circle cx="32" cy="14" r="4" fill="currentColor" opacity="0.7"/>
+                    <circle cx="12" cy="28" r="4" fill="currentColor" opacity="0.7"/>
+                    <circle cx="28" cy="28" r="4" fill="currentColor" opacity="0.7"/>
+                </svg>
+                <span></span>
+            </div>
 
-        <p class="footer-message">
-            Thank you for being part of our story.
-        </p>
+            <div class="details-grid">
 
-    </footer>
+                <article class="detail-card reveal reveal-up">
+                    <div class="detail-icon" aria-hidden="true">⌂</div>
+                    <h3>Wedding Ceremony</h3>
+                    <p>
+                        Addis Amba<br>
+                        JW Kingdom Hall
+                    </p>
+                    <span>09:00 AM</span>
+                </article>
 
-    </div><!-- /.invitation-content -->
+                <article class="detail-card reveal reveal-up">
+                    <div class="detail-icon" aria-hidden="true">♡</div>
+                    <h3>Celebration</h3>
+                    <p>In the house</p>
+                    <span>12:00 PM</span>
+                </article>
+
+                <article class="detail-card reveal reveal-up">
+                    <div class="detail-icon" aria-hidden="true">◎</div>
+                    <h3>Zoom Meeting</h3>
+                    <p>
+                        Zoom ID: 990 863 5436<br>
+                        Passcode: 303030
+                    </p>
+                    <span>09:00 AM</span>
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- GALLERY -->
+        <section class="wedding-section gallery-section">
+
+            <p class="section-label reveal">Our moments</p>
+
+            <h2 class="reveal">Memories of Us</h2>
+
+            <div class="floral-divider reveal" aria-hidden="true">
+                <span></span>
+                <svg viewBox="0 0 40 40" width="18" height="18">
+                    <path d="M20 4 C16 12 8 14 8 20 C8 26 14 28 20 36 C26 28 32 26 32 20 C32 14 24 12 20 4Z" fill="currentColor"/>
+                </svg>
+                <span></span>
+            </div>
+
+            <div class="gallery">
+                <div class="gallery-item reveal reveal-scale">
+                    <img src="images/jw.jpg" alt="Medhanit and Samuel">
+                </div>
+                <div class="gallery-item reveal reveal-scale">
+                    <img src="images/jw.jpg" alt="A cherished moment together">
+                </div>
+                <div class="gallery-item reveal reveal-scale">
+                    <img src="images/jw.jpg" alt="Walking into forever">
+                </div>
+                <div class="gallery-item reveal reveal-scale">
+                    <img src="images/jw.jpg" alt="Love in bloom">
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- LOCATION -->
+        <section class="wedding-section location-section">
+
+            <p class="section-label reveal">Find us</p>
+
+            <h2 class="reveal">Wedding Location</h2>
+
+            <p class="reveal">Addis Amba JW Kingdom Hall</p>
+
+            <div class="map-container reveal reveal-up">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18..."
+                    allowfullscreen=""
+                    loading="lazy"
+                    title="Wedding location map">
+                </iframe>
+            </div>
+
+        </section>
+
+
+        <!-- RSVP -->
+        <section class="wedding-section rsvp-section">
+
+            <div class="rsvp-frame reveal reveal-up">
+
+                <div class="floral floral-corner floral-tl" aria-hidden="true"></div>
+                <div class="floral floral-corner floral-br" aria-hidden="true"></div>
+
+                <p class="section-label">Your presence means everything</p>
+
+                <h2>Will You Join Us?</h2>
+
+                <div class="floral-divider" aria-hidden="true">
+                    <span></span>
+                    <svg viewBox="0 0 40 40" width="18" height="18">
+                        <path d="M20 4 C16 12 8 14 8 20 C8 26 14 28 20 36 C26 28 32 26 32 20 C32 14 24 12 20 4Z" fill="currentColor"/>
+                    </svg>
+                    <span></span>
+                </div>
+
+                <p>
+                    Please let us know if you will be
+                    celebrating with us.
+                </p>
+
+                <a
+                    class="rsvp-button"
+                    href="https://wa.me/2519XXXXXXXX"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    Confirm RSVP
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer>
+
+            <div class="floral-divider footer-floral" aria-hidden="true">
+                <span></span>
+                <svg viewBox="0 0 40 40" width="20" height="20">
+                    <circle cx="20" cy="20" r="5" fill="currentColor"/>
+                    <circle cx="8" cy="14" r="4" fill="currentColor" opacity="0.7"/>
+                    <circle cx="32" cy="14" r="4" fill="currentColor" opacity="0.7"/>
+                    <circle cx="12" cy="28" r="4" fill="currentColor" opacity="0.7"/>
+                    <circle cx="28" cy="28" r="4" fill="currentColor" opacity="0.7"/>
+                </svg>
+                <span></span>
+            </div>
+
+            <h2 class="reveal">Medhanit &amp; Samuel</h2>
+
+            <p class="reveal">November 21, 2026</p>
+
+            <div class="footer-heart" aria-hidden="true">♡</div>
+
+            <p class="footer-message reveal">
+                Thank you for being part of our story.
+            </p>
+
+        </footer>
+
+    </div>
 
     <script src="script.js"></script>
 

@@ -1642,6 +1642,169 @@ footer p {
 
 
 /* =====================================================
+   FLORAL DECORATIONS
+   ===================================================== */
+
+.floral {
+    pointer-events: none;
+    color: var(--gold-soft, #e7c56a);
+}
+
+
+.floral-hero-left,
+.floral-hero-right {
+    position: absolute;
+    bottom: 0;
+    width: min(140px, 28vw);
+    opacity: 0.55;
+    z-index: 1;
+    animation: floralSway 7s ease-in-out infinite;
+}
+
+
+.floral-hero-left {
+    left: 0;
+    transform-origin: bottom left;
+}
+
+
+.floral-hero-right {
+    right: 0;
+    transform: scaleX(-1);
+    transform-origin: bottom right;
+    animation-delay: -3.5s;
+}
+
+
+.floral-hero-left svg,
+.floral-hero-right svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+.floral-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 8px auto 28px;
+    color: var(--gold, #c9a24a);
+}
+
+
+.floral-divider span {
+    display: block;
+    width: min(72px, 18vw);
+    height: 1px;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            currentColor,
+            transparent
+        );
+}
+
+
+.floral-side {
+    position: absolute;
+    top: 40px;
+    width: 70px;
+    color: rgba(201, 162, 74, 0.28);
+    z-index: 0;
+}
+
+
+.floral-side svg {
+    width: 100%;
+    height: auto;
+}
+
+
+.floral-left {
+    left: 0;
+}
+
+
+.floral-right {
+    right: 0;
+    transform: scaleX(-1);
+}
+
+
+.story-section {
+    position: relative;
+}
+
+
+.floral-corner {
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    opacity: 0.35;
+    background:
+        radial-gradient(circle at 30% 30%, #e7c56a 0 28%, transparent 30%),
+        radial-gradient(circle at 70% 35%, #d4a85c 0 22%, transparent 24%),
+        radial-gradient(circle at 45% 70%, #c9a24a 0 24%, transparent 26%);
+}
+
+
+.floral-tl {
+    top: 12px;
+    left: 12px;
+}
+
+
+.floral-tr {
+    top: 12px;
+    right: 12px;
+    transform: scaleX(-1);
+}
+
+
+.floral-br {
+    bottom: 12px;
+    right: 12px;
+    transform: scale(-1);
+}
+
+
+.countdown-section,
+.rsvp-frame {
+    position: relative;
+}
+
+
+.footer-floral {
+    margin-bottom: 24px;
+    color: rgba(231, 197, 106, 0.7);
+}
+
+
+.hero-verse {
+    max-width: 420px;
+    margin: 0 auto 18px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(17px, 2.8vw, 20px);
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+
+.hero-verse em {
+    display: block;
+    margin-top: 8px;
+    font-size: 12px;
+    font-style: normal;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold-soft, #e7c56a);
+}
+
+
+/* =====================================================
    FLOATING PETALS
    ===================================================== */
 
@@ -1659,6 +1822,18 @@ footer p {
 }
 
 
+.page-petals {
+    z-index: 35;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+
+.wedding-page.invitation-open .page-petals {
+    opacity: 1;
+}
+
+
 .petal {
 
     position: absolute;
@@ -1668,11 +1843,12 @@ footer p {
     background:
         radial-gradient(
             circle at 30% 30%,
-            #f3d98a,
-            #c9a24a 70%
+            #f7e4a8,
+            #d4a85c 55%,
+            #b8893a 100%
         );
 
-    border-radius: 60% 40% 60% 40%;
+    border-radius: 70% 30% 70% 30%;
 
     animation-name: petalFall;
 
@@ -1680,23 +1856,56 @@ footer p {
 
     animation-iteration-count: infinite;
 
-    filter: blur(0.2px);
+    box-shadow: 0 0 6px rgba(231, 197, 106, 0.25);
+}
+
+
+.petal.petal-rose {
+    background:
+        radial-gradient(
+            circle at 30% 30%,
+            #f3d0d0,
+            #d4a0a0 60%,
+            #b87a7a 100%
+        );
 }
 
 
 /* =====================================================
-   SCROLL REVEAL
+   SCROLL REVEAL (gentle appear)
    ===================================================== */
 
 .reveal {
 
     opacity: 0;
 
-    transform: translateY(28px);
+    transform: translateY(32px);
 
     transition:
-        opacity 0.9s ease,
-        transform 0.9s ease;
+        opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change: opacity, transform;
+}
+
+
+.reveal.reveal-up {
+    transform: translateY(40px);
+}
+
+
+.reveal.reveal-left {
+    transform: translateX(-36px);
+}
+
+
+.reveal.reveal-right {
+    transform: translateX(36px);
+}
+
+
+.reveal.reveal-scale {
+    transform: translateY(24px) scale(0.96);
 }
 
 
@@ -1704,7 +1913,7 @@ footer p {
 
     opacity: 1;
 
-    transform: translateY(0);
+    transform: translateY(0) translateX(0) scale(1);
 }
 
 
@@ -1718,8 +1927,51 @@ footer p {
         transform: translate3d(0, -10vh, 0) rotate(0deg);
     }
 
+    25% {
+        transform: translate3d(18px, 20vh, 0) rotate(90deg);
+    }
+
+    50% {
+        transform: translate3d(-10px, 50vh, 0) rotate(180deg);
+    }
+
+    75% {
+        transform: translate3d(28px, 80vh, 0) rotate(270deg);
+    }
+
     100% {
-        transform: translate3d(40px, 110vh, 0) rotate(360deg);
+        transform: translate3d(12px, 110vh, 0) rotate(360deg);
+    }
+}
+
+
+@keyframes floralSway {
+
+    0%,
+    100% {
+        transform: rotate(-2deg);
+    }
+
+    50% {
+        transform: rotate(2.5deg);
+    }
+}
+
+
+.floral-hero-right {
+    animation-name: floralSwayFlip;
+}
+
+
+@keyframes floralSwayFlip {
+
+    0%,
+    100% {
+        transform: scaleX(-1) rotate(-2deg);
+    }
+
+    50% {
+        transform: scaleX(-1) rotate(2.5deg);
     }
 }
 
@@ -1772,7 +2024,9 @@ footer p {
     .petal,
     .scroll-cue span,
     .footer-heart,
-    .music-toggle.is-playing .music-icon {
+    .music-toggle.is-playing .music-icon,
+    .floral-hero-left,
+    .floral-hero-right {
         animation: none !important;
     }
 
@@ -1881,5 +2135,20 @@ footer p {
     .floating-petals {
 
         opacity: 0.7;
+    }
+
+    .floral-side {
+        display: none;
+    }
+
+    .floral-hero-left,
+    .floral-hero-right {
+        width: 22vw;
+        opacity: 0.4;
+    }
+
+    .floral-corner {
+        width: 40px;
+        height: 40px;
     }
 }

@@ -16,6 +16,16 @@ function openInvitation() {
         return;
     }
 
+    // Remember to autoplay music on the invitation page
+    try {
+        sessionStorage.setItem("weddingPlayMusic", "1");
+    } catch (e) {
+        // ignore storage errors
+    }
+
+    // Start music on the open click (allowed by browser gesture rules)
+    playWeddingMusic();
+
     envelope.classList.add("opening");
     envelope.classList.add("open");
 
@@ -174,124 +184,141 @@ function initReveals() {
 
 
 /* =====================================================
-   SOFT AMBIENT MUSIC (Web Audio)
+   WEDDING MUSIC — Unfailing Love (autoplay on open)
    ===================================================== */
 
-let audioCtx = null;
-let musicMaster = null;
-let musicTimer = null;
 let musicPlaying = false;
+let unlockHandlersBound = false;
 
-const melodyNotes = [
-    392.0, 440.0, 523.25, 493.88,
-    440.0, 392.0, 349.23, 392.0
-];
-
-function createSoftAmbience() {
-
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-    musicMaster = audioCtx.createGain();
-    musicMaster.gain.value = 0;
-    musicMaster.connect(audioCtx.destination);
+function getWeddingAudio() {
+    return document.getElementById("weddingMusic");
 }
 
-function playMelodyNote(freq, when) {
+function setMusicUI(isPlaying) {
 
-    if (!audioCtx || !musicMaster) {
+    const toggle = document.getElementById("musicToggle");
+
+    musicPlaying = isPlaying;
+
+    if (!toggle) {
         return;
     }
 
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    const filter = audioCtx.createBiquadFilter();
-
-    osc.type = "sine";
-    osc.frequency.value = freq;
-
-    filter.type = "lowpass";
-    filter.frequency.value = 1400;
-
-    gain.gain.setValueAtTime(0, when);
-    gain.gain.linearRampToValueAtTime(0.07, when + 0.12);
-    gain.gain.exponentialRampToValueAtTime(0.001, when + 1.6);
-
-    osc.connect(filter);
-    filter.connect(gain);
-    gain.connect(musicMaster);
-
-    osc.start(when);
-    osc.stop(when + 1.7);
+    if (isPlaying) {
+        toggle.classList.add("is-playing");
+        toggle.setAttribute("aria-label", "Pause music");
+    } else {
+        toggle.classList.remove("is-playing");
+        toggle.setAttribute("aria-label", "Play music");
+    }
 }
 
-function scheduleMelody() {
+function playWeddingMusic() {
 
-    if (!audioCtx || !musicPlaying) {
+    const audio = getWeddingAudio();
+
+    if (!audio) {
+        return Promise.resolve(false);
+    }
+
+    audio.volume = 0.45;
+    audio.loop = true;
+
+    return audio.play().then(function () {
+        setMusicUI(true);
+        return true;
+    }).catch(function () {
+        setMusicUI(false);
+        return false;
+    });
+}
+
+function pauseWeddingMusic() {
+
+    const audio = getWeddingAudio();
+
+    if (!audio) {
         return;
     }
 
-    const start = audioCtx.currentTime + 0.05;
+    audio.pause();
+    setMusicUI(false);
+}
 
-    melodyNotes.forEach(function (freq, i) {
-        playMelodyNote(freq, start + i * 0.85);
+function unlockMusicOnFirstGesture() {
+
+    if (unlockHandlersBound || musicPlaying) {
+        return;
+    }
+
+    unlockHandlersBound = true;
+
+    function unlock() {
+        playWeddingMusic().then(function (started) {
+            if (started) {
+                document.removeEventListener("click", unlock);
+                document.removeEventListener("touchstart", unlock);
+                document.removeEventListener("keydown", unlock);
+            }
+        });
+    }
+
+    document.addEventListener("click", unlock);
+    document.addEventListener("touchstart", unlock, { passive: true });
+    document.addEventListener("keydown", unlock);
+}
+
+function toggleMusic(event) {
+
+    if (event) {
+        event.stopPropagation();
+    }
+
+    const audio = getWeddingAudio();
+    const toggle = document.getElementById("musicToggle");
+
+    if (!audio || !toggle) {
+        return;
+    }
+
+    if (musicPlaying && !audio.paused) {
+        pauseWeddingMusic();
+    } else {
+        playWeddingMusic();
+    }
+}
+
+function initWeddingMusic() {
+
+    const audio = getWeddingAudio();
+
+    if (!audio) {
+        return;
+    }
+
+    const toggle = document.getElementById("musicToggle");
+
+    if (toggle) {
+        toggle.addEventListener("click", toggleMusic);
+    }
+
+    // On the invitation page, autoplay by default
+    if (!document.body.classList.contains("wedding-page")) {
+        return;
+    }
+
+    playWeddingMusic().then(function (started) {
+        if (!started) {
+            // Some browsers block autoplay until a tap
+            unlockMusicOnFirstGesture();
+        }
     });
 
-    musicTimer = setTimeout(scheduleMelody, melodyNotes.length * 850 + 1200);
-}
-
-function fadeMusic(target, duration) {
-
-    if (!musicMaster || !audioCtx) {
-        return;
+    try {
+        sessionStorage.removeItem("weddingPlayMusic");
+    } catch (e) {
+        // ignore
     }
-
-    const now = audioCtx.currentTime;
-    musicMaster.gain.cancelScheduledValues(now);
-    musicMaster.gain.setValueAtTime(musicMaster.gain.value, now);
-    musicMaster.gain.linearRampToValueAtTime(target, now + duration);
-}
-
-function toggleMusic() {
-
-    const toggle = document.getElementById("musicToggle");
-
-    if (!toggle) {
-        return;
-    }
-
-    if (!audioCtx) {
-        createSoftAmbience();
-    }
-
-    if (audioCtx.state === "suspended") {
-        audioCtx.resume();
-    }
-
-    musicPlaying = !musicPlaying;
-
-    if (musicPlaying) {
-        fadeMusic(0.85, 1.2);
-        scheduleMelody();
-        toggle.classList.add("is-playing");
-        toggle.setAttribute("aria-label", "Pause soft music");
-    } else {
-        fadeMusic(0, 0.8);
-        clearTimeout(musicTimer);
-        musicTimer = null;
-        toggle.classList.remove("is-playing");
-        toggle.setAttribute("aria-label", "Play soft music");
-    }
-}
-
-function initMusicToggle() {
-
-    const toggle = document.getElementById("musicToggle");
-
-    if (!toggle) {
-        return;
-    }
-
-    toggle.addEventListener("click", toggleMusic);
 }
 
 
@@ -352,7 +379,7 @@ function initHeroParallax() {
 document.addEventListener("DOMContentLoaded", function () {
     createPetals();
     initReveals();
-    initMusicToggle();
+    initWeddingMusic();
     initEnvelopeAccess();
     initHeroParallax();
 

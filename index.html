@@ -3,20 +3,63 @@
 
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medhanit & Samuel</title>
-
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-    <h1>Medhanit & Samuel</h1>
+    <div class="background-overlay"></div>
+
+    <div class="floating-petals" aria-hidden="true"></div>
+
+    <div class="container">
+
+        <div class="invite-card">
+
+            <p class="welcome">You are warmly invited</p>
+
+            <h1>
+                Medhanit
+                <span>&</span>
+                Samuel
+            </h1>
+
+            <div class="gold-line"></div>
+
+            <p class="verse">
+                "He has made everything beautiful in its time."
+            </p>
+            <p class="verse-ref">Ecclesiastes 3:11</p>
+
+            <div class="envelope" onclick="openInvitation()" role="button" tabindex="0" aria-label="Open invitation">
+
+                <div class="flap"></div>
+
+                <div class="letter">
+                    <h3>M & S</h3>
+                    <p>Nov 20, 2026</p>
+                </div>
+
+                <div class="envelope-body"></div>
+
+                <div class="seal"></div>
+
+            </div>
+
+            <p class="guest">
+                Tap the envelope to open our invitation
+            </p>
+
+            <button type="button" onclick="openInvitation()">
+                Open Invitation
+            </button>
+
+        </div>
+
+    </div>
 
     <script src="script.js"></script>
 

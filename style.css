@@ -843,7 +843,7 @@ body:not(.wedding-page) {
 
     margin-bottom: 22px;
 
-    color: rgba(255, 255, 255, 0.88);
+    color: var(--gold-soft, #e7c56a);
 }
 
 

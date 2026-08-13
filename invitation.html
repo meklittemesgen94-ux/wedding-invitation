@@ -6,7 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light">
     <meta name="theme-color" content="#f7f1e7">
-    <title>Medhanit & Samuel | Wedding</title>
+    <title>Medhanit & Samuel | Wedding Invitation</title>
+    <meta name="description" content="You are warmly invited to the wedding of Medhanit & Samuel — November 14, 2026 in Addis Ababa.">
+
+    <!-- WhatsApp / social preview -->
+    <meta property="og:title" content="Medhanit & Samuel are getting married">
+    <meta property="og:description" content="November 14, 2026 · Addis Ababa · You are warmly invited.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="images/jw.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="preload" href="images/jw.jpg" as="image">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
@@ -49,10 +59,8 @@
                 </div>
 
                 <p class="guest">
-                    Tap the circle to open our invitation
+                    Tap the envelope to open our invitation
                 </p>
-
-                
 
             </div>
         </div>
@@ -67,7 +75,6 @@
         <source src="audio/unfailing-love.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Soft petals over the invitation -->
     <div class="floating-petals page-petals" data-petals="page" aria-hidden="true"></div>
 
     <div class="invitation-content" id="invitationContent">
@@ -100,22 +107,15 @@
 
             <div class="hero-content">
 
-                <p class="small-title reveal">
-                    We are getting married
-                </p>
+                <p class="small-title reveal">We are getting married</p>
 
-                <br>
-
- 
                 <h1 class="reveal">
                     Medhanit
                     <span>&</span>
                     Samuel
                 </h1>
 
-                <p class="hero-date reveal">
-                    November 14, 2026
-                </p>
+                <p class="hero-date reveal">November 14, 2026</p>
 
                 <div class="floral-divider reveal" aria-hidden="true">
                     <span></span>
@@ -125,12 +125,13 @@
                     <span></span>
                 </div>
 
-                <br>
+                <p class="hero-verse reveal">
+                    "He has made everything beautiful in its time."
+                    <em>Ecclesiastes 3:11</em>
+                </p>
 
                 <p class="hero-message reveal">
-                    We invite you to celebrate our love,
-                    our friendship and the beginning of
-                    our forever together.
+                    Celebrate with us as two hearts become one forever.
                 </p>
 
             </div>
@@ -149,7 +150,6 @@
             <div class="floral floral-corner floral-tr" aria-hidden="true"></div>
 
             <p class="section-label reveal">The big day</p>
-
             <h2 class="reveal">Counting Down to Forever</h2>
 
             <div class="floral-divider reveal" aria-hidden="true">
@@ -183,6 +183,14 @@
                 </div>
             </div>
 
+            <a
+                class="calendar-link reveal"
+                href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Medhanit+%26+Samuel+Wedding&dates=20261114T060000Z/20261114T120000Z&details=Wedding+ceremony+at+Addis+Amba+JW+Kingdom+Hall,+Addis+Ababa&location=XQ68%2BMCP,+Addis+Ababa"
+                target="_blank"
+                rel="noopener noreferrer">
+                Add to Calendar
+            </a>
+
         </section>
 
 
@@ -208,7 +216,6 @@
             </div>
 
             <p class="section-label reveal">Our story</p>
-
             <h2 class="reveal">Two Hearts, One Story</h2>
 
             <div class="floral-divider reveal" aria-hidden="true">
@@ -251,7 +258,6 @@
         <section class="wedding-section details-section">
 
             <p class="section-label reveal">Join us</p>
-
             <h2 class="reveal">Wedding Details</h2>
 
             <div class="floral-divider reveal" aria-hidden="true">
@@ -300,11 +306,10 @@
         </section>
 
 
-        <!-- GALLERY -->
+        <!-- GALLERY — ready for your real photos -->
         <section class="wedding-section gallery-section">
 
             <p class="section-label reveal">Our moments</p>
-
             <h2 class="reveal">Memories of Us</h2>
 
             <div class="floral-divider reveal" aria-hidden="true">
@@ -315,18 +320,23 @@
                 <span></span>
             </div>
 
+            <p class="gallery-note reveal">
+                A few favorite moments from our journey.
+            </p>
+
             <div class="gallery">
+                <!-- Replace these files in /images when ready: photo1.jpg … photo4.jpg -->
                 <div class="gallery-item reveal reveal-scale">
-                    <img src="images/jw.jpg" alt="Medhanit and Samuel">
+                    <img src="images/photo1.jpg" alt="Medhanit and Samuel" onerror="this.onerror=null;this.src='images/jw.jpg'">
                 </div>
                 <div class="gallery-item reveal reveal-scale">
-                    <img src="images/jw.jpg" alt="A cherished moment together">
+                    <img src="images/photo2.jpg" alt="A cherished moment together" onerror="this.onerror=null;this.src='images/jw.jpg'">
                 </div>
                 <div class="gallery-item reveal reveal-scale">
-                    <img src="images/jw.jpg" alt="Walking into forever">
+                    <img src="images/photo3.jpg" alt="Walking into forever" onerror="this.onerror=null;this.src='images/jw.jpg'">
                 </div>
                 <div class="gallery-item reveal reveal-scale">
-                    <img src="images/jw.jpg" alt="Love in bloom">
+                    <img src="images/photo4.jpg" alt="Love in bloom" onerror="this.onerror=null;this.src='images/jw.jpg'">
                 </div>
             </div>
 
@@ -337,7 +347,6 @@
         <section class="wedding-section location-section">
 
             <p class="section-label reveal">Find us</p>
-
             <h2 class="reveal">Wedding Location</h2>
 
             <p class="location-name reveal">Addis Amba JW Kingdom Hall</p>
@@ -367,7 +376,7 @@
         </section>
 
 
-        <!-- RSVP -->
+        <!-- CLOSING NOTE -->
         <section class="wedding-section rsvp-section">
 
             <div class="rsvp-frame reveal reveal-up">
@@ -376,7 +385,6 @@
                 <div class="floral floral-corner floral-br" aria-hidden="true"></div>
 
                 <p class="section-label">With grateful hearts</p>
-
                 <h2>Thank You</h2>
 
                 <div class="floral-divider" aria-hidden="true">
@@ -413,13 +421,10 @@
             </div>
 
             <h2 class="reveal">Medhanit &amp; Samuel</h2>
-
             <p class="reveal">November 14, 2026</p>
-
             <div class="footer-heart" aria-hidden="true">♡</div>
-
             <p class="footer-message reveal">
-                Thank you for being part of our story.
+                With love, until we celebrate together.
             </p>
 
         </footer>

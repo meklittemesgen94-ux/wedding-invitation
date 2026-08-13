@@ -1368,11 +1368,23 @@ body:not(.wedding-page) {
 }
 
 
+.calendar-actions {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-top: 36px;
+}
+
+
 .calendar-link {
 
     display: inline-block;
-
-    margin-top: 36px;
 
     padding: 11px 24px;
 
@@ -1394,11 +1406,20 @@ body:not(.wedding-page) {
 }
 
 
-.calendar-link:hover {
+.calendar-link:hover,
+.calendar-link-soft:hover {
 
     background: var(--gold, #c9a24a);
 
     color: white;
+}
+
+
+.calendar-link-soft {
+
+    border-color: rgba(38, 59, 90, 0.25);
+
+    color: var(--navy, #263b5a);
 }
 
 

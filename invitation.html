@@ -108,8 +108,26 @@
             <div class="hero-content">
 
                 <p class="small-title reveal">We are getting married</p>
-                <br>
-                <br>
+
+                <div class="wedding-rings reveal" aria-hidden="true">
+                    <svg viewBox="0 0 72 40" width="72" height="40">
+                        <defs>
+                            <linearGradient id="ringGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#f3e0a0"/>
+                                <stop offset="45%" stop-color="#e7c56a"/>
+                                <stop offset="100%" stop-color="#b88928"/>
+                            </linearGradient>
+                        </defs>
+                        <!-- left ring -->
+                        <circle cx="28" cy="20" r="12" fill="none" stroke="url(#ringGold)" stroke-width="2.4"/>
+                        <circle cx="28" cy="20" r="9.2" fill="none" stroke="url(#ringGold)" stroke-width="0.7" opacity="0.45"/>
+                        <!-- right ring (interlocked) -->
+                        <circle cx="44" cy="20" r="12" fill="none" stroke="url(#ringGold)" stroke-width="2.4"/>
+                        <circle cx="44" cy="20" r="9.2" fill="none" stroke="url(#ringGold)" stroke-width="0.7" opacity="0.45"/>
+                        <!-- tiny sparkle -->
+                        <circle cx="36" cy="14" r="1.2" fill="#f3e0a0" opacity="0.9"/>
+                    </svg>
+                </div>
 
                 <h1 class="reveal">
                     Medhanit

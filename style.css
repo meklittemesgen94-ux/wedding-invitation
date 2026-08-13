@@ -841,9 +841,46 @@ body:not(.wedding-page) {
 
     text-transform: uppercase;
 
-    margin-bottom: 22px;
+    margin-bottom: 14px;
 
     color: var(--gold-soft, #e7c56a);
+}
+
+
+.wedding-rings {
+
+    display: flex;
+
+    justify-content: center;
+
+    margin: 0 auto 18px;
+
+    color: var(--gold-soft, #e7c56a);
+
+    filter: drop-shadow(0 2px 8px rgba(231, 197, 106, 0.35));
+}
+
+
+.wedding-rings svg {
+
+    display: block;
+
+    animation: ringsGlow 3.2s ease-in-out infinite;
+}
+
+
+@keyframes ringsGlow {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.88;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
 }
 
 
@@ -2172,7 +2209,8 @@ footer p {
     .footer-heart,
     .music-toggle.is-playing .music-icon,
     .floral-hero-left,
-    .floral-hero-right {
+    .floral-hero-right,
+    .wedding-rings svg {
         animation: none !important;
     }
 

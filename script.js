@@ -70,7 +70,7 @@ function openInvitation() {
    COUNTDOWN
    ===================================================== */
 
-const weddingDate = new Date("NOV 20, 2026 09:00:00").getTime();
+const weddingDate = new Date("NOV 14, 2026 09:00:00").getTime();
 
 function updateCountdown() {
 

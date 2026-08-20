@@ -835,15 +835,19 @@ body:not(.wedding-page) {
 
 .small-title {
 
-    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
 
-    letter-spacing: 5px;
+    font-size: 11px;
+
+    font-weight: 300;
+
+    letter-spacing: 4px;
 
     text-transform: uppercase;
 
     margin-bottom: 14px;
 
-    color: rgba(255, 255, 255, 0.95);
+    color: rgba(255, 255, 255, 0.9);
 }
 
 
@@ -936,14 +940,16 @@ body:not(.wedding-page) {
 
     font-family: 'Great Vibes', cursive;
 
-    font-size: clamp(72px, 14vw, 120px);
+    font-size: clamp(52px, 12vw, 96px);
 
     font-weight: 400;
 
-    line-height: 0.95;
+    line-height: 1.05;
+
+    color: white;
 
     text-shadow:
-        0 5px 25px rgba(0, 0, 0, 0.4);
+        0 3px 15px rgba(0, 0, 0, 0.35);
 }
 
 
@@ -953,11 +959,11 @@ body:not(.wedding-page) {
 
     font-family: 'Cormorant Garamond', serif;
 
-    font-size: clamp(28px, 5vw, 38px);
+    font-size: clamp(26px, 5vw, 34px);
 
-    color: var(--gold-soft);
+    color: var(--gold-soft, #e7c56a);
 
-    margin: 8px 0 4px;
+    margin: 6px 0 4px;
 }
 
 

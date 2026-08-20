@@ -610,6 +610,70 @@ function initFirebaseWishes() {
 
 
 /* =====================================================
+   ADD TO CALENDAR (.ics)
+   ===================================================== */
+
+function buildWeddingIcs() {
+    // 09:00–15:00 Addis Ababa (UTC+3) on Nov 14, 2026
+    return [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//Medhanit and Samuel//Wedding Invitation//EN",
+        "CALSCALE:GREGORIAN",
+        "METHOD:PUBLISH",
+        "BEGIN:VEVENT",
+        "UID:medhanit-samuel-wedding-20261114@weddinv",
+        "DTSTAMP:20260820T090000Z",
+        "DTSTART:20261114T060000Z",
+        "DTEND:20261114T120000Z",
+        "SUMMARY:Medhanit & Samuel Wedding",
+        "DESCRIPTION:Ceremony 09:00 AM at Addis Amba JW Kingdom Hall. Celebration 12:00 PM. Zoom ID: 990 863 5436 Passcode: 303030",
+        "LOCATION:Addis Amba JW Kingdom Hall\\, XQ68+MCP\\, Addis Ababa\\, Ethiopia",
+        "STATUS:CONFIRMED",
+        "SEQUENCE:0",
+        "END:VEVENT",
+        "END:VCALENDAR"
+    ].join("\r\n");
+}
+
+function initAddToCalendar() {
+
+    const link = document.getElementById("addToCalendar");
+
+    if (!link) {
+        return;
+    }
+
+    link.addEventListener("click", function (event) {
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+        // iPhone/iPad: open the .ics file so Calendar can import it
+        if (isIOS) {
+            return;
+        }
+
+        // Android/desktop: download a generated calendar file
+        event.preventDefault();
+
+        const icsText = buildWeddingIcs();
+        const blob = new Blob([icsText], {
+            type: "text/calendar;charset=utf-8"
+        });
+        const url = URL.createObjectURL(blob);
+        const temp = document.createElement("a");
+        temp.href = url;
+        temp.download = "Medhanit-Samuel-Wedding.ics";
+        document.body.appendChild(temp);
+        temp.click();
+        temp.remove();
+        setTimeout(function () {
+            URL.revokeObjectURL(url);
+        }, 2000);
+    });
+}
+
+
+/* =====================================================
    INIT
    ===================================================== */
 
@@ -619,5 +683,6 @@ document.addEventListener("DOMContentLoaded", function () {
     initEnvelopeAccess();
     initHeroParallax();
     initFirebaseWishes();
+    initAddToCalendar();
     // Scroll reveals start after the envelope opens
 });

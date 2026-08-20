@@ -3,25 +3,14 @@ VERSION:2.0
 PRODID:-//Medhanit and Samuel//Wedding Invitation//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-BEGIN:VTIMEZONE
-TZID:Africa/Addis_Ababa
-X-LIC-LOCATION:Africa/Addis_Ababa
-BEGIN:STANDARD
-TZOFFSETFROM:+0300
-TZOFFSETTO:+0300
-TZNAME:EAT
-DTSTART:19700101T000000
-END:STANDARD
-END:VTIMEZONE
 BEGIN:VEVENT
 UID:medhanit-samuel-wedding-20261114@weddinv
-DTSTAMP:20260813T080000Z
-DTSTART;TZID=Africa/Addis_Ababa:20261114T090000
-DTEND;TZID=Africa/Addis_Ababa:20261114T150000
+DTSTAMP:20260820T090000Z
+DTSTART:20261114T060000Z
+DTEND:20261114T120000Z
 SUMMARY:Medhanit & Samuel Wedding
-DESCRIPTION:Wedding ceremony at Addis Amba JW Kingdom Hall (09:00 AM).\nCelebration in the house (12:00 PM).\n\nZoom ID: 990 863 5436\nPasscode: 303030
+DESCRIPTION:Ceremony 09:00 AM at Addis Amba JW Kingdom Hall. Celebration 12:00 PM. Zoom ID: 990 863 5436 Passcode: 303030
 LOCATION:Addis Amba JW Kingdom Hall\, XQ68+MCP\, Addis Ababa\, Ethiopia
-URL:https://meklittemesgen94-ux.github.io/wedding-invitation/
 STATUS:CONFIRMED
 SEQUENCE:0
 END:VEVENT

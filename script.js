@@ -412,6 +412,204 @@ function initHeroParallax() {
 
 
 /* =====================================================
+   GUEST WISHES (Firebase Firestore)
+   ===================================================== */
+
+/*
+  SETUP (free Firebase):
+  1. Go to https://console.firebase.google.com
+  2. Create a project (e.g. medhanit-samuel-wedding)
+  3. Build → Firestore Database → Create database → Start in test mode
+     (then paste the rules from firestore.rules)
+  4. Project settings → Your apps → Web → Register app
+  5. Copy the firebaseConfig values into FIREBASE_CONFIG below
+*/
+const FIREBASE_CONFIG = {
+    apiKey: "AIzaSyAhAt-5ApABygNXF0OFA4fm2SOqpy7xHCI",
+    authDomain: "medhanit-samuel-wedding.firebaseapp.com",
+    projectId: "medhanit-samuel-wedding",
+    storageBucket: "medhanit-samuel-wedding.firebasestorage.app",
+    messagingSenderId: "358764916765",
+    appId: "1:358764916765:web:d9b8ed6757fb79d7f156f4",
+    measurementId: "G-8Z26EHMBTG"
+};
+
+let wishesDb = null;
+
+function isFirebaseConfigured() {
+    return (
+        FIREBASE_CONFIG.apiKey &&
+        FIREBASE_CONFIG.apiKey !== "YOUR_API_KEY" &&
+        FIREBASE_CONFIG.projectId &&
+        FIREBASE_CONFIG.projectId !== "YOUR_PROJECT_ID"
+    );
+}
+
+function escapeHtml(text) {
+    return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+}
+
+function formatWishDate(value) {
+    try {
+        const date = value && value.toDate ? value.toDate() : new Date(value);
+        if (Number.isNaN(date.getTime())) {
+            return "";
+        }
+        return date.toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric"
+        });
+    } catch (e) {
+        return "";
+    }
+}
+
+function renderWishCard(wish) {
+    const card = document.createElement("article");
+    card.className = "wish-card";
+    card.innerHTML =
+        '<p class="wish-card-message">“' + escapeHtml(wish.message) + '”</p>' +
+        '<p class="wish-card-meta">' +
+        "<span>" + escapeHtml(wish.name) + "</span>" +
+        (wish.createdAt
+            ? '<span class="wish-card-date">' +
+              escapeHtml(formatWishDate(wish.createdAt)) +
+              "</span>"
+            : "") +
+        "</p>";
+    return card;
+}
+
+function initFirebaseWishes() {
+
+    const form = document.getElementById("wishForm");
+    const status = document.getElementById("wishStatus");
+    const submit = document.getElementById("wishSubmit");
+    const wall = document.getElementById("wishesWall");
+    const empty = document.getElementById("wishesEmpty");
+
+    if (!form || !status || !submit || !wall) {
+        return;
+    }
+
+    if (!isFirebaseConfigured()) {
+        status.hidden = false;
+        status.className = "wish-status is-error";
+        status.textContent =
+            "Wishes will appear here once Firebase setup is finished.";
+        return;
+    }
+
+    if (typeof firebase === "undefined") {
+        status.hidden = false;
+        status.className = "wish-status is-error";
+        status.textContent = "Could not load Firebase. Please refresh.";
+        return;
+    }
+
+    firebase.initializeApp(FIREBASE_CONFIG);
+    wishesDb = firebase.firestore();
+
+    // Live list of wishes on the page
+    wishesDb
+        .collection("wishes")
+        .orderBy("createdAt", "desc")
+        .limit(80)
+        .onSnapshot(
+            function (snapshot) {
+                wall.querySelectorAll(".wish-card").forEach(function (card) {
+                    card.remove();
+                });
+
+                if (snapshot.empty) {
+                    if (empty) {
+                        empty.hidden = false;
+                    }
+                    return;
+                }
+
+                if (empty) {
+                    empty.hidden = true;
+                }
+
+                snapshot.forEach(function (doc) {
+                    const data = doc.data() || {};
+                    wall.appendChild(
+                        renderWishCard({
+                            name: data.name || "Guest",
+                            message: data.message || "",
+                            createdAt: data.createdAt
+                        })
+                    );
+                });
+            },
+            function () {
+                status.hidden = false;
+                status.className = "wish-status is-error";
+                status.textContent =
+                    "Could not load wishes. Check Firestore rules.";
+            }
+        );
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const honey = document.getElementById("wishHoney");
+        if (honey && honey.value) {
+            return;
+        }
+
+        const name = form.name.value.trim();
+        const message = form.message.value.trim();
+
+        if (!name || !message) {
+            return;
+        }
+
+        if (name.length > 80 || message.length > 500) {
+            status.hidden = false;
+            status.className = "wish-status is-error";
+            status.textContent = "Please keep your wish a little shorter.";
+            return;
+        }
+
+        submit.disabled = true;
+        status.hidden = false;
+        status.className = "wish-status";
+        status.textContent = "Sending your wish...";
+
+        wishesDb
+            .collection("wishes")
+            .add({
+                name: name,
+                message: message,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            })
+            .then(function () {
+                status.className = "wish-status is-success";
+                status.textContent =
+                    "Thank you — your wish is now on the wall.";
+                form.reset();
+            })
+            .catch(function () {
+                status.className = "wish-status is-error";
+                status.textContent =
+                    "Sorry, something went wrong. Please try again.";
+            })
+            .finally(function () {
+                submit.disabled = false;
+            });
+    });
+}
+
+
+/* =====================================================
    INIT
    ===================================================== */
 
@@ -420,5 +618,6 @@ document.addEventListener("DOMContentLoaded", function () {
     initWeddingMusic();
     initEnvelopeAccess();
     initHeroParallax();
+    initFirebaseWishes();
     // Scroll reveals start after the envelope opens
 });

@@ -1710,6 +1710,262 @@ body:not(.wedding-page) {
 
 
 /* =====================================================
+   GUEST WISHES + PHOTO SHARE
+   ===================================================== */
+
+.wishes-section {
+    max-width: 640px;
+    padding-bottom: 60px;
+}
+
+
+.wishes-intro {
+    max-width: 420px;
+    margin: -8px auto 28px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-style: italic;
+    color: var(--ink-soft, #5c6672);
+}
+
+
+.wishes-wall {
+    display: grid;
+    gap: 14px;
+    margin: 0 auto 28px;
+    text-align: left;
+}
+
+
+.wishes-empty {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: #8a8490;
+    padding: 18px 10px;
+}
+
+
+.wish-card {
+    padding: 18px 18px 14px;
+    border: 1px solid rgba(201, 162, 74, 0.28);
+    background: rgba(255, 253, 248, 0.9);
+}
+
+
+.wish-card-message {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--navy, #263b5a);
+    margin-bottom: 10px;
+}
+
+
+.wish-card-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--gold, #c9a24a);
+}
+
+
+.wish-card-date {
+    color: #8a8490;
+    letter-spacing: 0.5px;
+    text-transform: none;
+}
+
+
+.wish-honey {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    height: 0;
+    width: 0;
+    pointer-events: none;
+}
+
+
+.wish-form {
+    text-align: left;
+    padding: 28px 24px 30px;
+    border: 1px solid rgba(201, 162, 74, 0.3);
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 253, 248, 0.85),
+            rgba(247, 238, 220, 0.4)
+        );
+}
+
+
+.wish-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold, #c9a24a);
+}
+
+
+.wish-input {
+    width: 100%;
+    margin-bottom: 18px;
+    padding: 12px 14px;
+    border: 1px solid rgba(201, 162, 74, 0.35);
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--navy, #263b5a);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    outline: none;
+    transition: border-color 0.25s ease;
+}
+
+
+.wish-input:focus {
+    border-color: var(--gold, #c9a24a);
+}
+
+
+.wish-textarea {
+    resize: vertical;
+    min-height: 110px;
+    line-height: 1.5;
+}
+
+
+.wish-submit {
+    display: inline-block;
+    width: 100%;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 2px;
+    background:
+        linear-gradient(
+            135deg,
+            #e7c56a,
+            #b88b28
+        );
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 8px 20px rgba(184, 139, 40, 0.22);
+}
+
+
+.wish-submit:hover {
+    transform: translateY(-2px);
+}
+
+
+.wish-submit:disabled {
+    opacity: 0.7;
+    cursor: wait;
+    transform: none;
+}
+
+
+.wish-status {
+    margin-top: 16px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    color: var(--navy, #263b5a);
+}
+
+
+.wish-status.is-error {
+    color: #8a3a3a;
+}
+
+
+.wish-status.is-success {
+    color: #3d6b4f;
+}
+
+
+.photo-share-section {
+    max-width: 640px;
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+
+.photo-share-frame {
+    padding: 48px 28px;
+    border: 1px solid rgba(201, 162, 74, 0.35);
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 253, 248, 0.7),
+            rgba(247, 238, 220, 0.45)
+        );
+    position: relative;
+}
+
+
+.photo-share-frame::before {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(201, 162, 74, 0.2);
+    pointer-events: none;
+}
+
+
+.photo-share-frame > * {
+    position: relative;
+}
+
+
+.photo-share-frame p:not(.section-label) {
+    color: #777;
+    margin-bottom: 26px;
+}
+
+
+.photo-share-button {
+    display: inline-block;
+    padding: 14px 28px;
+    background:
+        linear-gradient(
+            135deg,
+            #e7c56a,
+            #b88b28
+        );
+    color: white;
+    text-decoration: none;
+    border-radius: 2px;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    box-shadow: 0 8px 20px rgba(184, 139, 40, 0.22);
+    transition: transform 0.25s ease;
+}
+
+
+.photo-share-button:hover {
+    transform: translateY(-2px);
+}
+
+
+.rsvp-section {
+    padding-top: 40px;
+}
+
+
+/* =====================================================
    FOOTER
    ===================================================== */
 
@@ -2364,6 +2620,12 @@ footer p {
     .rsvp-frame {
 
         padding: 40px 20px;
+    }
+
+    .wish-form,
+    .photo-share-frame {
+        padding-left: 18px;
+        padding-right: 18px;
     }
 
     .floating-petals {

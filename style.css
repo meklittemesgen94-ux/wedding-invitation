@@ -672,8 +672,9 @@ body:not(.wedding-page) {
 
     top: 53%;
 
-    transform:
-        translate(-50%, -50%);
+    margin-left: -27px;
+
+    margin-top: -27px;
 
     display: flex;
 
@@ -706,22 +707,30 @@ body:not(.wedding-page) {
         transform 0.5s ease;
 
     animation: sealGlow 2.8s ease-in-out 1.4s infinite;
+
+    -webkit-font-smoothing: antialiased;
+
+    text-rendering: geometricPrecision;
 }
 
 
-.seal span {
+.seal-mono {
 
-    font-family: 'Cormorant Garamond', serif;
+    display: block;
 
-    font-size: 13px;
+    width: 28px;
 
-    font-weight: 600;
+    height: 28px;
 
-    letter-spacing: 0.5px;
+    overflow: visible;
 
-    color: #5c3d0c;
+    flex-shrink: 0;
+}
 
-    text-shadow: 0 1px 0 rgba(255, 236, 180, 0.45);
+
+.seal-mono text {
+
+    paint-order: stroke fill;
 }
 
 
@@ -873,9 +882,7 @@ body:not(.wedding-page) {
 
     opacity: 0;
 
-    transform:
-        translate(-50%, -50%)
-        scale(0.5);
+    transform: scale(0.5);
 }
 
 
@@ -2899,27 +2906,69 @@ footer p {
 
     .envelope {
 
-        transform: scale(0.9);
+        width: 210px;
 
-        animation: envelopeFloatMobile 3.8s ease-in-out 1s infinite;
-    }
+        height: 132px;
 
-    @keyframes envelopeFloatMobile {
-        0%, 100% {
-            transform: scale(0.9) translateY(0);
-        }
-        50% {
-            transform: scale(0.9) translateY(-6px);
-        }
+        animation: envelopeFloat 3.8s ease-in-out 1s infinite;
     }
 
     .envelope:hover {
 
-        transform:
-            translateY(-5px)
-            scale(0.93);
+        transform: translateY(-6px);
 
         animation-play-state: paused;
+    }
+
+    .envelope-body {
+
+        width: 210px;
+
+        height: 114px;
+    }
+
+    .envelope-body::before,
+    .envelope-body::after {
+
+        border-left-width: 105px;
+
+        border-right-width: 105px;
+    }
+
+    .flap {
+
+        border-left-width: 105px;
+
+        border-right-width: 105px;
+
+        border-top-width: 74px;
+    }
+
+    .letter {
+
+        left: 16px;
+
+        width: 178px;
+
+        height: 96px;
+    }
+
+    .seal {
+
+        width: 50px;
+
+        height: 50px;
+
+        margin-left: -25px;
+
+        margin-top: -25px;
+    }
+
+    .seal-mono {
+
+        width: 26px;
+
+        height: 26px;
     }
 
     .invite-card {

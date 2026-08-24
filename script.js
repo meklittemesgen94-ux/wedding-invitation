@@ -416,12 +416,11 @@ function initHeroParallax() {
    ===================================================== */
 
 /*
-  SETUP (free Firebase):
-  1. Firestore rules: publish firestore.rules
-  2. Authentication → Sign-in method → Email/Password → Enable
-  3. Authentication → Users → Add user (couple email + password)
-  4. Use that email/password in "Manage wishes" on the site
+  Couple PIN to edit/delete wishes (no Firebase sign-in).
+  Change this to any private code you like.
 */
+const WISHES_ADMIN_PIN = "141126";
+
 const FIREBASE_CONFIG = {
     apiKey: "AIzaSyAhAt-5ApABygNXF0OFA4fm2SOqpy7xHCI",
     authDomain: "medhanit-samuel-wedding.firebaseapp.com",
@@ -435,9 +434,9 @@ const FIREBASE_CONFIG = {
 const MAX_WISHES_PER_GUEST = 1;
 const GUEST_ID_KEY = "weddingGuestId";
 const GUEST_COUNT_KEY = "weddingWishCount";
+const ADMIN_UNLOCK_KEY = "weddingWishAdmin";
 
 let wishesDb = null;
-let wishesAuth = null;
 let isWishAdmin = false;
 let lastWishDocs = [];
 
@@ -600,7 +599,7 @@ function editWish(id, oldName, oldMessage) {
             message: cleanMessage.slice(0, 500)
         })
         .catch(function () {
-            window.alert("Could not edit. Make sure you are signed in as admin.");
+            window.alert("Could not edit this wish. Check Firestore rules.");
         });
 }
 
@@ -618,27 +617,41 @@ function deleteWish(id) {
         .doc(id)
         .delete()
         .catch(function () {
-            window.alert("Could not delete. Make sure you are signed in as admin.");
+            window.alert("Could not delete this wish. Check Firestore rules.");
         });
 }
 
-function setAdminUi(loggedIn) {
-    isWishAdmin = loggedIn;
+function setAdminUi(unlocked) {
+    isWishAdmin = unlocked;
 
-    const loginBtn = document.getElementById("adminLoginBtn");
-    const logoutBtn = document.getElementById("adminLogoutBtn");
-    const help = document.querySelector(".wish-admin-help");
+    const unlockBtn = document.getElementById("adminUnlockBtn");
+    const lockBtn = document.getElementById("adminLockBtn");
+    const pinInput = document.getElementById("adminPin");
+    const help = document.getElementById("wishAdminHelp");
 
-    if (loginBtn) {
-        loginBtn.hidden = loggedIn;
+    if (unlockBtn) {
+        unlockBtn.hidden = unlocked;
     }
-    if (logoutBtn) {
-        logoutBtn.hidden = !loggedIn;
+    if (lockBtn) {
+        lockBtn.hidden = !unlocked;
+    }
+    if (pinInput) {
+        pinInput.hidden = unlocked;
     }
     if (help) {
-        help.textContent = loggedIn
-            ? "Admin mode on — you can edit or delete wishes."
-            : "Sign in to edit or delete wishes.";
+        help.textContent = unlocked
+            ? "Unlocked — you can edit or delete wishes."
+            : "Enter your PIN to edit or delete wishes.";
+    }
+
+    try {
+        if (unlocked) {
+            sessionStorage.setItem(ADMIN_UNLOCK_KEY, "1");
+        } else {
+            sessionStorage.removeItem(ADMIN_UNLOCK_KEY);
+        }
+    } catch (e) {
+        // ignore
     }
 }
 
@@ -666,64 +679,52 @@ function paintWishesWall(wall, empty) {
 function initWishAdmin() {
     const toggle = document.getElementById("wishAdminToggle");
     const panel = document.getElementById("wishAdminPanel");
-    const loginBtn = document.getElementById("adminLoginBtn");
-    const logoutBtn = document.getElementById("adminLogoutBtn");
+    const unlockBtn = document.getElementById("adminUnlockBtn");
+    const lockBtn = document.getElementById("adminLockBtn");
     const status = document.getElementById("adminStatus");
     const wall = document.getElementById("wishesWall");
     const empty = document.getElementById("wishesEmpty");
 
-    if (!toggle || !panel || !loginBtn || !logoutBtn) {
+    if (!toggle || !panel || !unlockBtn || !lockBtn) {
         return;
+    }
+
+    try {
+        if (sessionStorage.getItem(ADMIN_UNLOCK_KEY) === "1") {
+            setAdminUi(true);
+            paintWishesWall(wall, empty);
+        }
+    } catch (e) {
+        // ignore
     }
 
     toggle.addEventListener("click", function () {
         panel.hidden = !panel.hidden;
     });
 
-    loginBtn.addEventListener("click", function () {
-        const email = (document.getElementById("adminEmail") || {}).value || "";
-        const password = (document.getElementById("adminPassword") || {}).value || "";
+    unlockBtn.addEventListener("click", function () {
+        const pin = ((document.getElementById("adminPin") || {}).value || "").trim();
 
-        if (!wishesAuth) {
-            return;
+        if (pin === WISHES_ADMIN_PIN) {
+            setAdminUi(true);
+            paintWishesWall(wall, empty);
+            status.hidden = false;
+            status.className = "wish-status is-success";
+            status.textContent = "Unlocked.";
+        } else {
+            status.hidden = false;
+            status.className = "wish-status is-error";
+            status.textContent = "Wrong PIN.";
         }
+    });
 
+    lockBtn.addEventListener("click", function () {
+        setAdminUi(false);
+        paintWishesWall(wall, empty);
         status.hidden = false;
         status.className = "wish-status";
-        status.textContent = "Signing in...";
-
-        wishesAuth
-            .signInWithEmailAndPassword(email.trim(), password)
-            .then(function () {
-                status.className = "wish-status is-success";
-                status.textContent = "Signed in.";
-            })
-            .catch(function () {
-                status.className = "wish-status is-error";
-                status.textContent = "Sign-in failed. Check email/password.";
-            });
+        status.textContent = "Locked.";
     });
-
-    logoutBtn.addEventListener("click", function () {
-        if (!wishesAuth) {
-            return;
-        }
-        wishesAuth.signOut();
-    });
-
-    if (wishesAuth) {
-        wishesAuth.onAuthStateChanged(function (user) {
-            setAdminUi(!!user);
-            if (wall) {
-                paintWishesWall(wall, empty);
-            }
-            if (status && user) {
-                status.hidden = false;
-                status.className = "wish-status is-success";
-                status.textContent = "Admin mode on.";
-            }
-        });
-    }
 }
 
 function initFirebaseWishes() {
@@ -757,7 +758,6 @@ function initFirebaseWishes() {
         firebase.initializeApp(FIREBASE_CONFIG);
     }
     wishesDb = firebase.firestore();
-    wishesAuth = firebase.auth();
 
     initWishAdmin();
     updateGuestFormAvailability(status, form, submit);

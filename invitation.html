@@ -487,28 +487,22 @@
                     Manage wishes
                 </button>
                 <div class="wish-admin-panel" id="wishAdminPanel" hidden>
-                    <p class="wish-admin-help">
-                        Sign in to edit or delete wishes.
+                    <p class="wish-admin-help" id="wishAdminHelp">
+                        Enter your PIN to edit or delete wishes.
                     </p>
                     <input
                         class="wish-input"
-                        id="adminEmail"
-                        type="email"
-                        placeholder="Admin email"
-                        autocomplete="username"
-                    >
-                    <input
-                        class="wish-input"
-                        id="adminPassword"
+                        id="adminPin"
                         type="password"
-                        placeholder="Admin password"
-                        autocomplete="current-password"
+                        inputmode="numeric"
+                        placeholder="PIN"
+                        autocomplete="off"
                     >
-                    <button type="button" class="wish-submit" id="adminLoginBtn">
-                        Sign in
+                    <button type="button" class="wish-submit" id="adminUnlockBtn">
+                        Unlock
                     </button>
-                    <button type="button" class="wish-admin-logout" id="adminLogoutBtn" hidden>
-                        Sign out
+                    <button type="button" class="wish-admin-logout" id="adminLockBtn" hidden>
+                        Lock
                     </button>
                     <p class="wish-status" id="adminStatus" hidden></p>
                 </div>
@@ -572,8 +566,9 @@
                 </div>
 
                 <p>
+        
                     Thank you for being part of our story.
-                    We can’t wait to share this day with you.
+                   
                 </p>
 
             </div>
@@ -607,7 +602,6 @@
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
     <script src="script.js"></script>
 

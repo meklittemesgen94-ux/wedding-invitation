@@ -17,7 +17,7 @@ service cloud.firestore {
         && request.resource.data.guestId.size() <= 80
         && request.resource.data.createdAt == request.time;
 
-      // Edit/delete unlocked in the app with a PIN (no Firebase sign-in)
+      // Anyone can edit/delete wishes (open invitation page)
       allow update, delete: if true;
     }
   }

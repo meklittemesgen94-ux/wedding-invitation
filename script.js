@@ -415,12 +415,6 @@ function initHeroParallax() {
    GUEST WISHES (Firebase Firestore)
    ===================================================== */
 
-/*
-  Couple PIN to edit/delete wishes (no Firebase sign-in).
-  Change this to any private code you like.
-*/
-const WISHES_ADMIN_PIN = "141126";
-
 const FIREBASE_CONFIG = {
     apiKey: "AIzaSyAhAt-5ApABygNXF0OFA4fm2SOqpy7xHCI",
     authDomain: "medhanit-samuel-wedding.firebaseapp.com",
@@ -434,10 +428,8 @@ const FIREBASE_CONFIG = {
 const MAX_WISHES_PER_GUEST = 1;
 const GUEST_ID_KEY = "weddingGuestId";
 const GUEST_COUNT_KEY = "weddingWishCount";
-const ADMIN_UNLOCK_KEY = "weddingWishAdmin";
 
 let wishesDb = null;
-let isWishAdmin = false;
 let lastWishDocs = [];
 
 function isFirebaseConfigured() {
@@ -527,15 +519,6 @@ function renderWishCard(wish) {
     card.className = "wish-card";
     card.dataset.id = wish.id || "";
 
-    let actions = "";
-    if (isWishAdmin) {
-        actions =
-            '<div class="wish-card-actions">' +
-            '<button type="button" class="wish-edit-btn">Edit</button>' +
-            '<button type="button" class="wish-delete-btn">Delete</button>' +
-            "</div>";
-    }
-
     card.innerHTML =
         '<p class="wish-card-message">“' + escapeHtml(wish.message) + '”</p>' +
         '<p class="wish-card-meta">' +
@@ -546,23 +529,24 @@ function renderWishCard(wish) {
               "</span>"
             : "") +
         "</p>" +
-        actions;
+        '<div class="wish-card-actions">' +
+        '<button type="button" class="wish-edit-btn">Edit</button>' +
+        '<button type="button" class="wish-delete-btn">Delete</button>' +
+        "</div>";
 
-    if (isWishAdmin) {
-        const editBtn = card.querySelector(".wish-edit-btn");
-        const deleteBtn = card.querySelector(".wish-delete-btn");
+    const editBtn = card.querySelector(".wish-edit-btn");
+    const deleteBtn = card.querySelector(".wish-delete-btn");
 
-        if (editBtn) {
-            editBtn.addEventListener("click", function () {
-                editWish(wish.id, wish.name, wish.message);
-            });
-        }
+    if (editBtn) {
+        editBtn.addEventListener("click", function () {
+            editWish(wish.id, wish.name, wish.message);
+        });
+    }
 
-        if (deleteBtn) {
-            deleteBtn.addEventListener("click", function () {
-                deleteWish(wish.id);
-            });
-        }
+    if (deleteBtn) {
+        deleteBtn.addEventListener("click", function () {
+            deleteWish(wish.id);
+        });
     }
 
     return card;
@@ -621,40 +605,6 @@ function deleteWish(id) {
         });
 }
 
-function setAdminUi(unlocked) {
-    isWishAdmin = unlocked;
-
-    const unlockBtn = document.getElementById("adminUnlockBtn");
-    const lockBtn = document.getElementById("adminLockBtn");
-    const pinInput = document.getElementById("adminPin");
-    const help = document.getElementById("wishAdminHelp");
-
-    if (unlockBtn) {
-        unlockBtn.hidden = unlocked;
-    }
-    if (lockBtn) {
-        lockBtn.hidden = !unlocked;
-    }
-    if (pinInput) {
-        pinInput.hidden = unlocked;
-    }
-    if (help) {
-        help.textContent = unlocked
-            ? "Unlocked — you can edit or delete wishes."
-            : "Enter your PIN to edit or delete wishes.";
-    }
-
-    try {
-        if (unlocked) {
-            sessionStorage.setItem(ADMIN_UNLOCK_KEY, "1");
-        } else {
-            sessionStorage.removeItem(ADMIN_UNLOCK_KEY);
-        }
-    } catch (e) {
-        // ignore
-    }
-}
-
 function paintWishesWall(wall, empty) {
     wall.querySelectorAll(".wish-card").forEach(function (card) {
         card.remove();
@@ -673,57 +623,6 @@ function paintWishesWall(wall, empty) {
 
     lastWishDocs.forEach(function (item) {
         wall.appendChild(renderWishCard(item));
-    });
-}
-
-function initWishAdmin() {
-    const toggle = document.getElementById("wishAdminToggle");
-    const panel = document.getElementById("wishAdminPanel");
-    const unlockBtn = document.getElementById("adminUnlockBtn");
-    const lockBtn = document.getElementById("adminLockBtn");
-    const status = document.getElementById("adminStatus");
-    const wall = document.getElementById("wishesWall");
-    const empty = document.getElementById("wishesEmpty");
-
-    if (!toggle || !panel || !unlockBtn || !lockBtn) {
-        return;
-    }
-
-    try {
-        if (sessionStorage.getItem(ADMIN_UNLOCK_KEY) === "1") {
-            setAdminUi(true);
-            paintWishesWall(wall, empty);
-        }
-    } catch (e) {
-        // ignore
-    }
-
-    toggle.addEventListener("click", function () {
-        panel.hidden = !panel.hidden;
-    });
-
-    unlockBtn.addEventListener("click", function () {
-        const pin = ((document.getElementById("adminPin") || {}).value || "").trim();
-
-        if (pin === WISHES_ADMIN_PIN) {
-            setAdminUi(true);
-            paintWishesWall(wall, empty);
-            status.hidden = false;
-            status.className = "wish-status is-success";
-            status.textContent = "Unlocked.";
-        } else {
-            status.hidden = false;
-            status.className = "wish-status is-error";
-            status.textContent = "Wrong PIN.";
-        }
-    });
-
-    lockBtn.addEventListener("click", function () {
-        setAdminUi(false);
-        paintWishesWall(wall, empty);
-        status.hidden = false;
-        status.className = "wish-status";
-        status.textContent = "Locked.";
     });
 }
 
@@ -759,7 +658,6 @@ function initFirebaseWishes() {
     }
     wishesDb = firebase.firestore();
 
-    initWishAdmin();
     updateGuestFormAvailability(status, form, submit);
 
     wishesDb

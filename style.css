@@ -1805,9 +1805,7 @@ body:not(.wedding-page) {
 
 
 .wish-edit-btn,
-.wish-delete-btn,
-.wish-admin-toggle,
-.wish-admin-logout {
+.wish-delete-btn {
     border: 1px solid rgba(201, 162, 74, 0.45);
     background: transparent;
     color: var(--navy, #263b5a);
@@ -1822,36 +1820,6 @@ body:not(.wedding-page) {
 .wish-delete-btn {
     color: #8a3a3a;
     border-color: rgba(138, 58, 58, 0.35);
-}
-
-
-.wish-admin-bar {
-    margin-top: 22px;
-    text-align: center;
-}
-
-
-.wish-admin-toggle {
-    margin-bottom: 12px;
-}
-
-
-.wish-admin-panel {
-    max-width: 420px;
-    margin: 0 auto;
-    text-align: left;
-    padding: 18px;
-    border: 1px solid rgba(201, 162, 74, 0.28);
-    background: rgba(255, 253, 248, 0.85);
-}
-
-
-.wish-admin-help {
-    margin-bottom: 12px;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 16px;
-    color: #666;
-    text-align: center;
 }
 
 

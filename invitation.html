@@ -27,11 +27,19 @@
     <div class="opening-gate" id="openingGate">
 
         <img class="photo-bg" src="images/jw.jpg" alt="" decoding="async">
-        <div class="photo-shade" aria-hidden="true"></div>
+        <div class="photo-shade gate-shade" aria-hidden="true"></div>
+        <div class="gate-glow" aria-hidden="true"></div>
         <div class="floating-petals" data-petals="gate" aria-hidden="true"></div>
 
         <div class="container">
             <div class="invite-card">
+
+                <div class="invite-flourish" aria-hidden="true">
+                    <svg viewBox="0 0 120 24" width="120" height="24" fill="none">
+                        <path d="M4 12 C28 4 40 4 60 12 C80 20 92 20 116 12" stroke="currentColor" stroke-width="1"/>
+                        <circle cx="60" cy="12" r="2.5" fill="currentColor"/>
+                    </svg>
+                </div>
 
                 <p class="welcome">You are warmly invited</p>
 
@@ -40,6 +48,8 @@
                     <span>&</span>
                     Samuel
                 </h1>
+
+                <p class="gate-date">November 14, 2026</p>
 
                 <div class="gold-line"></div>
 
@@ -55,10 +65,11 @@
                         <p>Nov 14, 2026</p>
                     </div>
                     <div class="envelope-body"></div>
-                    <div class="seal"></div>
+                    <div class="seal" aria-hidden="true"><span>M&amp;S</span></div>
                 </div>
 
                 <p class="guest">
+                    <span class="guest-cue" aria-hidden="true"></span>
                     Tap the envelope to open our invitation
                 </p>
 

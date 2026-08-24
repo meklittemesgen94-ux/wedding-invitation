@@ -436,6 +436,10 @@
 
             <form class="wish-form reveal reveal-up" id="wishForm">
 
+                <p class="wish-limit-note">
+                    You can share one wish.
+                </p>
+
                 <label class="wish-label" for="wishName">Your name</label>
                 <input
                     class="wish-input"
@@ -477,6 +481,38 @@
                 <p class="wish-status" id="wishStatus" hidden></p>
 
             </form>
+
+            <div class="wish-admin-bar reveal">
+                <button type="button" class="wish-admin-toggle" id="wishAdminToggle">
+                    Manage wishes
+                </button>
+                <div class="wish-admin-panel" id="wishAdminPanel" hidden>
+                    <p class="wish-admin-help">
+                        Sign in to edit or delete wishes.
+                    </p>
+                    <input
+                        class="wish-input"
+                        id="adminEmail"
+                        type="email"
+                        placeholder="Admin email"
+                        autocomplete="username"
+                    >
+                    <input
+                        class="wish-input"
+                        id="adminPassword"
+                        type="password"
+                        placeholder="Admin password"
+                        autocomplete="current-password"
+                    >
+                    <button type="button" class="wish-submit" id="adminLoginBtn">
+                        Sign in
+                    </button>
+                    <button type="button" class="wish-admin-logout" id="adminLogoutBtn" hidden>
+                        Sign out
+                    </button>
+                    <p class="wish-status" id="adminStatus" hidden></p>
+                </div>
+            </div>
 
         </section>
 
@@ -571,6 +607,7 @@
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
     <script src="script.js"></script>
 

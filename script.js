@@ -417,12 +417,10 @@ function initHeroParallax() {
 
 /*
   SETUP (free Firebase):
-  1. Go to https://console.firebase.google.com
-  2. Create a project (e.g. medhanit-samuel-wedding)
-  3. Build → Firestore Database → Create database → Start in test mode
-     (then paste the rules from firestore.rules)
-  4. Project settings → Your apps → Web → Register app
-  5. Copy the firebaseConfig values into FIREBASE_CONFIG below
+  1. Firestore rules: publish firestore.rules
+  2. Authentication → Sign-in method → Email/Password → Enable
+  3. Authentication → Users → Add user (couple email + password)
+  4. Use that email/password in "Manage wishes" on the site
 */
 const FIREBASE_CONFIG = {
     apiKey: "AIzaSyAhAt-5ApABygNXF0OFA4fm2SOqpy7xHCI",
@@ -434,7 +432,14 @@ const FIREBASE_CONFIG = {
     measurementId: "G-8Z26EHMBTG"
 };
 
+const MAX_WISHES_PER_GUEST = 1;
+const GUEST_ID_KEY = "weddingGuestId";
+const GUEST_COUNT_KEY = "weddingWishCount";
+
 let wishesDb = null;
+let wishesAuth = null;
+let isWishAdmin = false;
+let lastWishDocs = [];
 
 function isFirebaseConfigured() {
     return (
@@ -470,9 +475,68 @@ function formatWishDate(value) {
     }
 }
 
+function getGuestId() {
+    try {
+        let id = localStorage.getItem(GUEST_ID_KEY);
+        if (!id) {
+            id = "g_" + Date.now().toString(36) + "_" +
+                Math.random().toString(36).slice(2, 10);
+            localStorage.setItem(GUEST_ID_KEY, id);
+        }
+        return id;
+    } catch (e) {
+        return "g_temp_" + Date.now().toString(36);
+    }
+}
+
+function getGuestWishCount() {
+    try {
+        return Number(localStorage.getItem(GUEST_COUNT_KEY) || "0") || 0;
+    } catch (e) {
+        return 0;
+    }
+}
+
+function setGuestWishCount(count) {
+    try {
+        localStorage.setItem(GUEST_COUNT_KEY, String(count));
+    } catch (e) {
+        // ignore
+    }
+}
+
+function updateGuestFormAvailability(status, form, submit) {
+    const used = getGuestWishCount();
+    if (used >= MAX_WISHES_PER_GUEST) {
+        form.querySelectorAll("input, textarea, button").forEach(function (el) {
+            if (el.id !== "wishHoney") {
+                el.disabled = true;
+            }
+        });
+        status.hidden = false;
+        status.className = "wish-status is-success";
+        status.textContent =
+            "Thank you — you’ve already shared your wish.";
+        if (submit) {
+            submit.textContent = "Limit reached";
+        }
+    }
+}
+
 function renderWishCard(wish) {
     const card = document.createElement("article");
     card.className = "wish-card";
+    card.dataset.id = wish.id || "";
+
+    let actions = "";
+    if (isWishAdmin) {
+        actions =
+            '<div class="wish-card-actions">' +
+            '<button type="button" class="wish-edit-btn">Edit</button>' +
+            '<button type="button" class="wish-delete-btn">Delete</button>' +
+            "</div>";
+    }
+
     card.innerHTML =
         '<p class="wish-card-message">“' + escapeHtml(wish.message) + '”</p>' +
         '<p class="wish-card-meta">' +
@@ -482,8 +546,184 @@ function renderWishCard(wish) {
               escapeHtml(formatWishDate(wish.createdAt)) +
               "</span>"
             : "") +
-        "</p>";
+        "</p>" +
+        actions;
+
+    if (isWishAdmin) {
+        const editBtn = card.querySelector(".wish-edit-btn");
+        const deleteBtn = card.querySelector(".wish-delete-btn");
+
+        if (editBtn) {
+            editBtn.addEventListener("click", function () {
+                editWish(wish.id, wish.name, wish.message);
+            });
+        }
+
+        if (deleteBtn) {
+            deleteBtn.addEventListener("click", function () {
+                deleteWish(wish.id);
+            });
+        }
+    }
+
     return card;
+}
+
+function editWish(id, oldName, oldMessage) {
+    if (!wishesDb || !id) {
+        return;
+    }
+
+    const name = window.prompt("Edit name:", oldName || "");
+    if (name === null) {
+        return;
+    }
+
+    const message = window.prompt("Edit wish:", oldMessage || "");
+    if (message === null) {
+        return;
+    }
+
+    const cleanName = name.trim();
+    const cleanMessage = message.trim();
+
+    if (!cleanName || !cleanMessage) {
+        window.alert("Name and wish cannot be empty.");
+        return;
+    }
+
+    wishesDb
+        .collection("wishes")
+        .doc(id)
+        .update({
+            name: cleanName.slice(0, 80),
+            message: cleanMessage.slice(0, 500)
+        })
+        .catch(function () {
+            window.alert("Could not edit. Make sure you are signed in as admin.");
+        });
+}
+
+function deleteWish(id) {
+    if (!wishesDb || !id) {
+        return;
+    }
+
+    if (!window.confirm("Delete this wish?")) {
+        return;
+    }
+
+    wishesDb
+        .collection("wishes")
+        .doc(id)
+        .delete()
+        .catch(function () {
+            window.alert("Could not delete. Make sure you are signed in as admin.");
+        });
+}
+
+function setAdminUi(loggedIn) {
+    isWishAdmin = loggedIn;
+
+    const loginBtn = document.getElementById("adminLoginBtn");
+    const logoutBtn = document.getElementById("adminLogoutBtn");
+    const help = document.querySelector(".wish-admin-help");
+
+    if (loginBtn) {
+        loginBtn.hidden = loggedIn;
+    }
+    if (logoutBtn) {
+        logoutBtn.hidden = !loggedIn;
+    }
+    if (help) {
+        help.textContent = loggedIn
+            ? "Admin mode on — you can edit or delete wishes."
+            : "Sign in to edit or delete wishes.";
+    }
+}
+
+function paintWishesWall(wall, empty) {
+    wall.querySelectorAll(".wish-card").forEach(function (card) {
+        card.remove();
+    });
+
+    if (!lastWishDocs.length) {
+        if (empty) {
+            empty.hidden = false;
+        }
+        return;
+    }
+
+    if (empty) {
+        empty.hidden = true;
+    }
+
+    lastWishDocs.forEach(function (item) {
+        wall.appendChild(renderWishCard(item));
+    });
+}
+
+function initWishAdmin() {
+    const toggle = document.getElementById("wishAdminToggle");
+    const panel = document.getElementById("wishAdminPanel");
+    const loginBtn = document.getElementById("adminLoginBtn");
+    const logoutBtn = document.getElementById("adminLogoutBtn");
+    const status = document.getElementById("adminStatus");
+    const wall = document.getElementById("wishesWall");
+    const empty = document.getElementById("wishesEmpty");
+
+    if (!toggle || !panel || !loginBtn || !logoutBtn) {
+        return;
+    }
+
+    toggle.addEventListener("click", function () {
+        panel.hidden = !panel.hidden;
+    });
+
+    loginBtn.addEventListener("click", function () {
+        const email = (document.getElementById("adminEmail") || {}).value || "";
+        const password = (document.getElementById("adminPassword") || {}).value || "";
+
+        if (!wishesAuth) {
+            return;
+        }
+
+        status.hidden = false;
+        status.className = "wish-status";
+        status.textContent = "Signing in...";
+
+        wishesAuth
+            .signInWithEmailAndPassword(email.trim(), password)
+            .then(function () {
+                status.className = "wish-status is-success";
+                status.textContent = "Signed in.";
+            })
+            .catch(function () {
+                status.className = "wish-status is-error";
+                status.textContent = "Sign-in failed. Check email/password.";
+            });
+    });
+
+    logoutBtn.addEventListener("click", function () {
+        if (!wishesAuth) {
+            return;
+        }
+        wishesAuth.signOut();
+    });
+
+    if (wishesAuth) {
+        wishesAuth.onAuthStateChanged(function (user) {
+            setAdminUi(!!user);
+            if (wall) {
+                paintWishesWall(wall, empty);
+            }
+            if (status && user) {
+                status.hidden = false;
+                status.className = "wish-status is-success";
+                status.textContent = "Admin mode on.";
+            }
+        });
+    }
 }
 
 function initFirebaseWishes() {
@@ -513,41 +753,32 @@ function initFirebaseWishes() {
         return;
     }
 
-    firebase.initializeApp(FIREBASE_CONFIG);
+    if (!firebase.apps.length) {
+        firebase.initializeApp(FIREBASE_CONFIG);
+    }
     wishesDb = firebase.firestore();
+    wishesAuth = firebase.auth();
 
-    // Live list of wishes on the page
+    initWishAdmin();
+    updateGuestFormAvailability(status, form, submit);
+
     wishesDb
         .collection("wishes")
         .orderBy("createdAt", "desc")
         .limit(80)
         .onSnapshot(
             function (snapshot) {
-                wall.querySelectorAll(".wish-card").forEach(function (card) {
-                    card.remove();
-                });
-
-                if (snapshot.empty) {
-                    if (empty) {
-                        empty.hidden = false;
-                    }
-                    return;
-                }
-
-                if (empty) {
-                    empty.hidden = true;
-                }
-
+                lastWishDocs = [];
                 snapshot.forEach(function (doc) {
                     const data = doc.data() || {};
-                    wall.appendChild(
-                        renderWishCard({
-                            name: data.name || "Guest",
-                            message: data.message || "",
-                            createdAt: data.createdAt
-                        })
-                    );
+                    lastWishDocs.push({
+                        id: doc.id,
+                        name: data.name || "Guest",
+                        message: data.message || "",
+                        createdAt: data.createdAt
+                    });
                 });
+                paintWishesWall(wall, empty);
             },
             function () {
                 status.hidden = false;
@@ -562,6 +793,12 @@ function initFirebaseWishes() {
 
         const honey = document.getElementById("wishHoney");
         if (honey && honey.value) {
+            return;
+        }
+
+        const used = getGuestWishCount();
+        if (used >= MAX_WISHES_PER_GUEST) {
+            updateGuestFormAvailability(status, form, submit);
             return;
         }
 
@@ -589,13 +826,17 @@ function initFirebaseWishes() {
             .add({
                 name: name,
                 message: message,
+                guestId: getGuestId(),
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
             })
             .then(function () {
+                const next = used + 1;
+                setGuestWishCount(next);
                 status.className = "wish-status is-success";
                 status.textContent =
                     "Thank you — your wish is now on the wall.";
                 form.reset();
+                updateGuestFormAvailability(status, form, submit);
             })
             .catch(function () {
                 status.className = "wish-status is-error";
@@ -604,6 +845,7 @@ function initFirebaseWishes() {
             })
             .finally(function () {
                 submit.disabled = false;
+                updateGuestFormAvailability(status, form, submit);
             });
     });
 }

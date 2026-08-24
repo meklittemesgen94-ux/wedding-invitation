@@ -1787,6 +1787,74 @@ body:not(.wedding-page) {
 }
 
 
+.wish-limit-note {
+    margin-bottom: 16px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-style: italic;
+    color: #8a8490;
+    text-align: center;
+}
+
+
+.wish-card-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+
+.wish-edit-btn,
+.wish-delete-btn,
+.wish-admin-toggle,
+.wish-admin-logout {
+    border: 1px solid rgba(201, 162, 74, 0.45);
+    background: transparent;
+    color: var(--navy, #263b5a);
+    padding: 7px 12px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+
+.wish-delete-btn {
+    color: #8a3a3a;
+    border-color: rgba(138, 58, 58, 0.35);
+}
+
+
+.wish-admin-bar {
+    margin-top: 22px;
+    text-align: center;
+}
+
+
+.wish-admin-toggle {
+    margin-bottom: 12px;
+}
+
+
+.wish-admin-panel {
+    max-width: 420px;
+    margin: 0 auto;
+    text-align: left;
+    padding: 18px;
+    border: 1px solid rgba(201, 162, 74, 0.28);
+    background: rgba(255, 253, 248, 0.85);
+}
+
+
+.wish-admin-help {
+    margin-bottom: 12px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+}
+
+
 .wish-honey {
     position: absolute;
     left: -9999px;

@@ -520,6 +520,7 @@ function renderWishCard(wish) {
     card.dataset.id = wish.id || "";
 
     card.innerHTML =
+        '<div class="wish-card-view">' +
         '<p class="wish-card-message">“' + escapeHtml(wish.message) + '”</p>' +
         '<p class="wish-card-meta">' +
         "<span>" + escapeHtml(wish.name) + "</span>" +
@@ -532,14 +533,70 @@ function renderWishCard(wish) {
         '<div class="wish-card-actions">' +
         '<button type="button" class="wish-edit-btn">Edit</button>' +
         '<button type="button" class="wish-delete-btn">Delete</button>' +
-        "</div>";
+        "</div>" +
+        "</div>" +
+        '<form class="wish-card-edit" hidden>' +
+        '<label class="wish-label" for="edit-name-' +
+        escapeHtml(wish.id) +
+        '">Name</label>' +
+        '<input class="wish-input" id="edit-name-' +
+        escapeHtml(wish.id) +
+        '" type="text" maxlength="80" required value="' +
+        escapeHtml(wish.name) +
+        '">' +
+        '<label class="wish-label" for="edit-msg-' +
+        escapeHtml(wish.id) +
+        '">Wish</label>' +
+        '<textarea class="wish-textarea" id="edit-msg-' +
+        escapeHtml(wish.id) +
+        '" rows="3" maxlength="500" required>' +
+        escapeHtml(wish.message) +
+        "</textarea>" +
+        '<div class="wish-card-actions">' +
+        '<button type="submit" class="wish-save-btn">Save</button>' +
+        '<button type="button" class="wish-cancel-btn">Cancel</button>' +
+        "</div>" +
+        "</form>";
 
+    const view = card.querySelector(".wish-card-view");
+    const editForm = card.querySelector(".wish-card-edit");
     const editBtn = card.querySelector(".wish-edit-btn");
     const deleteBtn = card.querySelector(".wish-delete-btn");
+    const cancelBtn = card.querySelector(".wish-cancel-btn");
+    const nameInput = card.querySelector(".wish-card-edit .wish-input");
+    const messageInput = card.querySelector(".wish-card-edit .wish-textarea");
 
-    if (editBtn) {
+    if (editBtn && view && editForm) {
         editBtn.addEventListener("click", function () {
-            editWish(wish.id, wish.name, wish.message);
+            view.hidden = true;
+            editForm.hidden = false;
+            if (nameInput) {
+                nameInput.focus();
+            }
+        });
+    }
+
+    if (cancelBtn && view && editForm) {
+        cancelBtn.addEventListener("click", function () {
+            editForm.hidden = true;
+            view.hidden = false;
+            if (nameInput) {
+                nameInput.value = wish.name || "";
+            }
+            if (messageInput) {
+                messageInput.value = wish.message || "";
+            }
+        });
+    }
+
+    if (editForm) {
+        editForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            saveWishEdit(
+                wish.id,
+                nameInput ? nameInput.value : "",
+                messageInput ? messageInput.value : ""
+            );
         });
     }
 
@@ -552,23 +609,13 @@ function renderWishCard(wish) {
     return card;
 }
 
-function editWish(id, oldName, oldMessage) {
+function saveWishEdit(id, name, message) {
     if (!wishesDb || !id) {
         return;
     }
 
-    const name = window.prompt("Edit name:", oldName || "");
-    if (name === null) {
-        return;
-    }
-
-    const message = window.prompt("Edit wish:", oldMessage || "");
-    if (message === null) {
-        return;
-    }
-
-    const cleanName = name.trim();
-    const cleanMessage = message.trim();
+    const cleanName = String(name || "").trim();
+    const cleanMessage = String(message || "").trim();
 
     if (!cleanName || !cleanMessage) {
         window.alert("Name and wish cannot be empty.");
@@ -582,8 +629,12 @@ function editWish(id, oldName, oldMessage) {
             name: cleanName.slice(0, 80),
             message: cleanMessage.slice(0, 500)
         })
-        .catch(function () {
-            window.alert("Could not edit this wish. Check Firestore rules.");
+        .catch(function (err) {
+            const detail = err && err.message ? " " + err.message : "";
+            window.alert(
+                "Could not edit this wish. Publish the latest Firestore rules." +
+                    detail
+            );
         });
 }
 

@@ -1804,8 +1804,25 @@ body:not(.wedding-page) {
 }
 
 
+.wish-card-edit {
+    margin-top: 4px;
+}
+
+
+.wish-card-edit .wish-label {
+    margin-top: 10px;
+}
+
+
+.wish-card-edit .wish-label:first-child {
+    margin-top: 0;
+}
+
+
 .wish-edit-btn,
-.wish-delete-btn {
+.wish-delete-btn,
+.wish-save-btn,
+.wish-cancel-btn {
     border: 1px solid rgba(201, 162, 74, 0.45);
     background: transparent;
     color: var(--navy, #263b5a);

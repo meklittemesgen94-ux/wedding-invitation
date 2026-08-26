@@ -111,7 +111,7 @@ const I18N = {
         "gate.letterDate": " ህዳር 14,2026",
         "gate.tap": "ፖስታውን በመንካት ግብዣችንን ይክፈቱ",
         "gate.openAria": "ግብዣውን ክፈት",
-        "hero.gettingMarried": ",We are getting married",
+        
         "hero.date": " ህዳር 14፣ 2026 · አዲስ አበባ",
         "hero.scrollAria": "ወደ ዝርዝር ይሸብልሉ",
         "countdown.label": "ትልቁ ቀን",

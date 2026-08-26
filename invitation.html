@@ -170,24 +170,7 @@
                     Samuel
                 </h1>
 
-                <p class="hero-date reveal">November 14, 2026</p>
-
-                <div class="floral-divider reveal" aria-hidden="true">
-                    <span></span>
-                    <svg viewBox="0 0 40 40" width="22" height="22">
-                        <path d="M20 4 C16 12 8 14 8 20 C8 26 14 28 20 36 C26 28 32 26 32 20 C32 14 24 12 20 4Z" fill="currentColor"/>
-                    </svg>
-                    <span></span>
-                </div>
-
-                <p class="hero-verse reveal">
-                    "He has made everything beautiful in its time."
-                    <em>Ecclesiastes 3:11</em>
-                </p>
-
-                <p class="hero-message reveal">
-                    Celebrate with us as two hearts become one forever.
-                </p>
+                <p class="hero-date reveal">November 14, 2026 · Addis Ababa</p>
 
             </div>
 
@@ -370,23 +353,40 @@
             </div>
 
             <p class="gallery-note reveal">
-                A few favorite moments from our journey.
+                Swipe through a few favorite moments from our journey.
             </p>
 
-            <div class="gallery">
-                <!-- Replace these files in /images when ready: photo1.jpg … photo4.jpg -->
-                <div class="gallery-item reveal reveal-scale">
-                    <img src="images/photo1.jpg" alt="Medhanit and Samuel" onerror="this.onerror=null;this.src='images/jw.jpg'">
+            <div class="gallery-carousel reveal" id="galleryCarousel">
+                <div class="gallery-frame">
+                    <div class="gallery-track" id="galleryTrack" tabindex="0" aria-label="Photo gallery">
+                        <!-- Replace these files in /images when ready: photo1.jpg … photo4.jpg -->
+                        <figure class="gallery-slide">
+                            <img src="images/photo1.jpg" alt="Medhanit and Samuel" onerror="this.onerror=null;this.src='images/jw.jpg'">
+                        </figure>
+                        <figure class="gallery-slide">
+                            <img src="images/photo2.jpg" alt="A cherished moment together" onerror="this.onerror=null;this.src='images/jw.jpg'">
+                        </figure>
+                        <figure class="gallery-slide">
+                            <img src="images/photo3.jpg" alt="Walking into forever" onerror="this.onerror=null;this.src='images/jw.jpg'">
+                        </figure>
+                        <figure class="gallery-slide">
+                            <img src="images/photo4.jpg" alt="Love in bloom" onerror="this.onerror=null;this.src='images/jw.jpg'">
+                        </figure>
+                    </div>
+
+                    <button type="button" class="gallery-nav gallery-prev" id="galleryPrev" aria-label="Previous photo">
+                        ‹
+                    </button>
+                    <button type="button" class="gallery-nav gallery-next" id="galleryNext" aria-label="Next photo">
+                        ›
+                    </button>
+
+                    <div class="gallery-count" aria-live="polite">
+                        <span id="galleryCurrent">1</span>/<span id="galleryTotal">4</span>
+                    </div>
                 </div>
-                <div class="gallery-item reveal reveal-scale">
-                    <img src="images/photo2.jpg" alt="A cherished moment together" onerror="this.onerror=null;this.src='images/jw.jpg'">
-                </div>
-                <div class="gallery-item reveal reveal-scale">
-                    <img src="images/photo3.jpg" alt="Walking into forever" onerror="this.onerror=null;this.src='images/jw.jpg'">
-                </div>
-                <div class="gallery-item reveal reveal-scale">
-                    <img src="images/photo4.jpg" alt="Love in bloom" onerror="this.onerror=null;this.src='images/jw.jpg'">
-                </div>
+
+                <div class="gallery-dots" id="galleryDots" role="tablist" aria-label="Gallery pages"></div>
             </div>
 
         </section>

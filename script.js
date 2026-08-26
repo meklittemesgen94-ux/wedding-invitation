@@ -523,7 +523,7 @@ function renderWishCard(wish) {
         '<div class="wish-card-view">' +
         '<p class="wish-card-message">“' + escapeHtml(wish.message) + '”</p>' +
         '<p class="wish-card-meta">' +
-        "<span>" + escapeHtml(wish.name) + "</span>" +
+        '<span class="wish-card-name">' + escapeHtml(wish.name) + "</span>" +
         (wish.createdAt
             ? '<span class="wish-card-date">' +
               escapeHtml(formatWishDate(wish.createdAt)) +
@@ -827,6 +827,123 @@ function buildWeddingIcs() {
     ].join("\r\n");
 }
 
+function initGalleryCarousel() {
+    const track = document.getElementById("galleryTrack");
+    const dotsWrap = document.getElementById("galleryDots");
+    const prevBtn = document.getElementById("galleryPrev");
+    const nextBtn = document.getElementById("galleryNext");
+    const currentEl = document.getElementById("galleryCurrent");
+    const totalEl = document.getElementById("galleryTotal");
+
+    if (!track || !dotsWrap) {
+        return;
+    }
+
+    const slides = Array.prototype.slice.call(
+        track.querySelectorAll(".gallery-slide")
+    );
+
+    if (!slides.length) {
+        return;
+    }
+
+    if (totalEl) {
+        totalEl.textContent = String(slides.length);
+    }
+
+    dotsWrap.innerHTML = "";
+    slides.forEach(function (_slide, index) {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "gallery-dot" + (index === 0 ? " is-active" : "");
+        dot.setAttribute("aria-label", "Go to photo " + (index + 1));
+        dot.addEventListener("click", function () {
+            goTo(index);
+        });
+        dotsWrap.appendChild(dot);
+    });
+
+    const dots = Array.prototype.slice.call(
+        dotsWrap.querySelectorAll(".gallery-dot")
+    );
+
+    function currentIndex() {
+        const width = track.clientWidth || 1;
+        return Math.round(track.scrollLeft / width);
+    }
+
+    function updateUi(index) {
+        const safe = Math.max(0, Math.min(index, slides.length - 1));
+        if (currentEl) {
+            currentEl.textContent = String(safe + 1);
+        }
+        dots.forEach(function (dot, i) {
+            dot.classList.toggle("is-active", i === safe);
+        });
+    }
+
+    function goTo(index) {
+        const safe = Math.max(0, Math.min(index, slides.length - 1));
+        track.scrollTo({
+            left: safe * track.clientWidth,
+            behavior: "smooth"
+        });
+        updateUi(safe);
+    }
+
+    let scrollTick = null;
+    track.addEventListener(
+        "scroll",
+        function () {
+            if (scrollTick) {
+                return;
+            }
+            scrollTick = window.requestAnimationFrame(function () {
+                scrollTick = null;
+                updateUi(currentIndex());
+            });
+        },
+        { passive: true }
+    );
+
+    if (prevBtn) {
+        prevBtn.addEventListener("click", function () {
+            goTo(currentIndex() - 1);
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener("click", function () {
+            goTo(currentIndex() + 1);
+        });
+    }
+
+    track.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowLeft") {
+            event.preventDefault();
+            goTo(currentIndex() - 1);
+        } else if (event.key === "ArrowRight") {
+            event.preventDefault();
+            goTo(currentIndex() + 1);
+        }
+    });
+
+    window.addEventListener(
+        "resize",
+        function () {
+            const index = currentIndex();
+            track.scrollTo({
+                left: index * track.clientWidth,
+                behavior: "auto"
+            });
+            updateUi(index);
+        },
+        { passive: true }
+    );
+
+    updateUi(0);
+}
+
 function initAddToCalendar() {
 
     const link = document.getElementById("addToCalendar");
@@ -874,6 +991,7 @@ document.addEventListener("DOMContentLoaded", function () {
     initEnvelopeAccess();
     initHeroParallax();
     initFirebaseWishes();
+    initGalleryCarousel();
     initAddToCalendar();
     // Scroll reveals start after the envelope opens
 });

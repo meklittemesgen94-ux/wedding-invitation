@@ -18,10 +18,15 @@
 
     <link rel="preload" href="images/jw.jpg" as="image">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Sans+Ethiopic:wght@300;400;500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 
 <body class="wedding-page invitation-locked">
+
+    <div class="lang-switch" id="langSwitch" role="group" aria-label="Language">
+        <button type="button" class="lang-btn is-active" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" class="lang-btn" data-lang="am" aria-pressed="false">አማ</button>
+    </div>
 
     <!-- OPENING GATE -->
     <div class="opening-gate" id="openingGate">
@@ -41,7 +46,7 @@
                     </svg>
                 </div>
 
-                <p class="welcome">You are warmly invited</p>
+                <p class="welcome" data-i18n="gate.welcome">You are warmly invited</p>
 
                 <h1>
                     Medhanit
@@ -49,20 +54,20 @@
                     Samuel
                 </h1>
 
-                <p class="gate-date">November 14, 2026</p>
+                <p class="gate-date" data-i18n="gate.date">November 14, 2026</p>
 
                 <div class="gold-line"></div>
 
-                <p class="verse">
+                <p class="verse" data-i18n="gate.verse">
                     "He has made everything beautiful in its time."
                 </p>
-                <p class="verse-ref">Ecclesiastes 3:11</p>
+                <p class="verse-ref" data-i18n="gate.verseRef">Ecclesiastes 3:11</p>
 
-                <div class="envelope" onclick="openInvitation()" role="button" tabindex="0" aria-label="Open invitation">
+                <div class="envelope" onclick="openInvitation()" role="button" tabindex="0" data-i18n-aria="gate.openAria" aria-label="Open invitation">
                     <div class="flap"></div>
                     <div class="letter">
                         <h3>M &amp; S</h3>
-                        <p>Nov 14, 2026</p>
+                        <p data-i18n="gate.letterDate">Nov 14, 2026</p>
                     </div>
                     <div class="envelope-body"></div>
                     <div class="seal" aria-hidden="true">
@@ -82,7 +87,7 @@
 
                 <p class="guest">
                     <span class="guest-cue" aria-hidden="true"></span>
-                    Tap the envelope to open our invitation
+                    <span data-i18n="gate.tap">Tap the envelope to open our invitation</span>
                 </p>
 
             </div>
@@ -130,7 +135,7 @@
 
             <div class="hero-content">
 
-                <p class="small-title reveal">We are getting married</p>
+                <p class="small-title reveal" data-i18n="hero.gettingMarried">We are getting married</p>
 
                 <div class="wedding-rings reveal" aria-hidden="true">
                     <svg class="rings-svg" viewBox="0 0 100 56" width="88" height="50">
@@ -170,11 +175,11 @@
                     Samuel
                 </h1>
 
-                <p class="hero-date reveal">November 14, 2026 · Addis Ababa</p>
+                <p class="hero-date reveal" data-i18n="hero.date">November 14, 2026 · Addis Ababa</p>
 
             </div>
 
-            <a href="#countdown" class="scroll-cue" aria-label="Scroll to details">
+            <a href="#countdown" class="scroll-cue" data-i18n-aria="hero.scrollAria" aria-label="Scroll to details">
                 <span></span>
             </a>
 
@@ -187,8 +192,8 @@
             <div class="floral floral-corner floral-tl" aria-hidden="true"></div>
             <div class="floral floral-corner floral-tr" aria-hidden="true"></div>
 
-            <p class="section-label reveal">The big day</p>
-            <h2 class="reveal">Counting Down to Forever</h2>
+            <p class="section-label reveal" data-i18n="countdown.label">The big day</p>
+            <h2 class="reveal" data-i18n="countdown.title">Counting Down to Forever</h2>
 
             <div class="floral-divider reveal" aria-hidden="true">
                 <span></span>
@@ -205,19 +210,19 @@
             <div class="timer">
                 <div class="time-box reveal reveal-up">
                     <span id="days">0</span>
-                    <p>Days</p>
+                    <p data-i18n="countdown.days">Days</p>
                 </div>
                 <div class="time-box reveal reveal-up">
                     <span id="hours">0</span>
-                    <p>Hours</p>
+                    <p data-i18n="countdown.hours">Hours</p>
                 </div>
                 <div class="time-box reveal reveal-up">
                     <span id="minutes">0</span>
-                    <p>Minutes</p>
+                    <p data-i18n="countdown.minutes">Minutes</p>
                 </div>
                 <div class="time-box reveal reveal-up">
                     <span id="seconds">0</span>
-                    <p>Seconds</p>
+                    <p data-i18n="countdown.seconds">Seconds</p>
                 </div>
             </div>
 
@@ -225,7 +230,8 @@
                 <a
                     class="calendar-link"
                     id="addToCalendar"
-                    href="wedding.ics">
+                    href="wedding.ics"
+                    data-i18n="countdown.calendar">
                     Add to Calendar
                 </a>
             </div>
@@ -254,8 +260,8 @@
                 </svg>
             </div>
 
-            <p class="section-label reveal">Our story</p>
-            <h2 class="reveal">Two Hearts, One Story</h2>
+            <p class="section-label reveal" data-i18n="story.label">Our story</p>
+            <h2 class="reveal" data-i18n="story.title">Two Hearts, One Story</h2>
 
             <div class="floral-divider reveal" aria-hidden="true">
                 <span></span>
@@ -265,29 +271,29 @@
                 <span></span>
             </div>
 
-            <p class="story-text reveal">
+            <p class="story-text reveal" data-i18n="story.p1">
                 Some stories are written in books,
                 but ours was written in the little
                 moments we shared together.
             </p>
 
-            <p class="story-text reveal">
+            <p class="story-text reveal" data-i18n="story.p2">
                 From childhood playmates to this
                 beautiful day, every moment has led
                 us here.
             </p>
 
-            <p class="story-text reveal">
+            <p class="story-text reveal" data-i18n="story.p3">
                 And now, we are ready to begin the
                 next chapter of our forever with Jehovah.
             </p>
 
             <blockquote class="story-verse reveal">
-                <p>
+                <p data-i18n="story.verse">
                     And now these three remain: faith, hope, and love.
                     But the greatest of these is love.
                 </p>
-                <cite>1 Corinthians 13:13</cite>
+                <cite data-i18n="story.verseRef">1 Corinthians 13:13</cite>
             </blockquote>
 
         </section>
@@ -296,8 +302,8 @@
         <!-- WEDDING DETAILS -->
         <section class="wedding-section details-section">
 
-            <p class="section-label reveal">Join us</p>
-            <h2 class="reveal">Wedding Details</h2>
+            <p class="section-label reveal" data-i18n="details.label">Join us</p>
+            <h2 class="reveal" data-i18n="details.title">Wedding Details</h2>
 
             <div class="floral-divider reveal" aria-hidden="true">
                 <span></span>
@@ -315,8 +321,8 @@
 
                 <article class="detail-card reveal reveal-up">
                     <div class="detail-icon" aria-hidden="true">⌂</div>
-                    <h3>Wedding Ceremony</h3>
-                    <p>
+                    <h3 data-i18n="details.ceremony">Wedding Ceremony</h3>
+                    <p data-i18n-html="details.ceremonyPlace">
                         Addis Amba<br>
                         JW Kingdom Hall
                     </p>
@@ -325,8 +331,8 @@
 
                 <article class="detail-card reveal reveal-up">
                     <div class="detail-icon" aria-hidden="true">◎</div>
-                    <h3>Zoom Meeting</h3>
-                    <p>
+                    <h3 data-i18n="details.zoom">Zoom Meeting</h3>
+                    <p data-i18n-html="details.zoomInfo">
                         Zoom ID: 990 863 5436<br>
                         Passcode: 303030
                     </p>
@@ -341,8 +347,8 @@
         <!-- GALLERY — ready for your real photos -->
         <section class="wedding-section gallery-section">
 
-            <p class="section-label reveal">Our moments</p>
-            <h2 class="reveal">Memories of Us</h2>
+            <p class="section-label reveal" data-i18n="gallery.label">Our moments</p>
+            <h2 class="reveal" data-i18n="gallery.title">Memories of Us</h2>
 
             <div class="floral-divider reveal" aria-hidden="true">
                 <span></span>
@@ -352,13 +358,13 @@
                 <span></span>
             </div>
 
-            <p class="gallery-note reveal">
+            <p class="gallery-note reveal" data-i18n="gallery.note">
                 Swipe through a few favorite moments from our journey.
             </p>
 
             <div class="gallery-carousel reveal" id="galleryCarousel">
                 <div class="gallery-frame">
-                    <div class="gallery-track" id="galleryTrack" tabindex="0" aria-label="Photo gallery">
+                    <div class="gallery-track" id="galleryTrack" tabindex="0" data-i18n-aria="gallery.trackAria" aria-label="Photo gallery">
                         <!-- Replace these files in /images when ready: photo1.jpg … photo4.jpg -->
                         <figure class="gallery-slide">
                             <img src="images/photo1.jpg" alt="Medhanit and Samuel" onerror="this.onerror=null;this.src='images/jw.jpg'">
@@ -374,10 +380,10 @@
                         </figure>
                     </div>
 
-                    <button type="button" class="gallery-nav gallery-prev" id="galleryPrev" aria-label="Previous photo">
+                    <button type="button" class="gallery-nav gallery-prev" id="galleryPrev" data-i18n-aria="gallery.prev" aria-label="Previous photo">
                         ‹
                     </button>
-                    <button type="button" class="gallery-nav gallery-next" id="galleryNext" aria-label="Next photo">
+                    <button type="button" class="gallery-nav gallery-next" id="galleryNext" data-i18n-aria="gallery.next" aria-label="Next photo">
                         ›
                     </button>
 
@@ -395,11 +401,11 @@
         <!-- LOCATION -->
         <section class="wedding-section location-section">
 
-            <p class="section-label reveal">Find us</p>
-            <h2 class="reveal">Wedding Location</h2>
+            <p class="section-label reveal" data-i18n="location.label">Find us</p>
+            <h2 class="reveal" data-i18n="location.title">Wedding Location</h2>
 
             <p class="location-name reveal">Addis Amba JW Kingdom Hall</p>
-            <p class="location-address reveal">
+            <p class="location-address reveal" data-i18n-html="location.address">
                 XQ68+MCP, Addis Ababa<br>
                 Ethiopia
             </p>
@@ -408,7 +414,8 @@
                 class="map-directions reveal"
                 href="https://www.google.com/maps/dir/?api=1&destination=XQ68%2BMCP%2C%20Addis%20Abeba"
                 target="_blank"
-                rel="noopener noreferrer">
+                rel="noopener noreferrer"
+                data-i18n="location.directions">
                 Get Directions
             </a>
 
@@ -428,8 +435,8 @@
         <!-- GUEST WISHES -->
         <section class="wedding-section wishes-section" id="wishes">
 
-            <p class="section-label reveal">From your hearts</p>
-            <h2 class="reveal">Guest Wishes</h2>
+            <p class="section-label reveal" data-i18n="wishes.label">From your hearts</p>
+            <h2 class="reveal" data-i18n="wishes.title">Guest Wishes</h2>
 
             <div class="floral-divider reveal" aria-hidden="true">
                 <span></span>
@@ -439,24 +446,24 @@
                 <span></span>
             </div>
 
-            <p class="wishes-intro reveal">
+            <p class="wishes-intro reveal" data-i18n="wishes.intro">
                 Share a short blessing for Medhanit &amp; Samuel —
                 your words will appear here for everyone to see.
             </p>
 
             <div class="wishes-wall reveal" id="wishesWall">
-                <p class="wishes-empty" id="wishesEmpty">
+                <p class="wishes-empty" id="wishesEmpty" data-i18n="wishes.empty">
                     Be the first to leave a wish.
                 </p>
             </div>
 
             <form class="wish-form reveal reveal-up" id="wishForm">
 
-                <p class="wish-limit-note">
+                <p class="wish-limit-note" data-i18n="wishes.limit">
                     You can share one wish.
                 </p>
 
-                <label class="wish-label" for="wishName">Your name</label>
+                <label class="wish-label" for="wishName" data-i18n="wishes.nameLabel">Your name</label>
                 <input
                     class="wish-input"
                     id="wishName"
@@ -464,11 +471,12 @@
                     type="text"
                     maxlength="80"
                     required
+                    data-i18n-placeholder="wishes.namePlaceholder"
                     placeholder="Your name"
                     autocomplete="name"
                 >
 
-                <label class="wish-label" for="wishMessage">Your wish</label>
+                <label class="wish-label" for="wishMessage" data-i18n="wishes.messageLabel">Your wish</label>
                 <textarea
                     class="wish-input wish-textarea"
                     id="wishMessage"
@@ -476,6 +484,7 @@
                     rows="4"
                     maxlength="500"
                     required
+                    data-i18n-placeholder="wishes.messagePlaceholder"
                     placeholder="Write your wish for the couple..."
                 ></textarea>
 
@@ -490,7 +499,7 @@
                     aria-hidden="true"
                 >
 
-                <button class="wish-submit" type="submit" id="wishSubmit">
+                <button class="wish-submit" type="submit" id="wishSubmit" data-i18n="wishes.send">
                     Send Wish
                 </button>
 
@@ -506,8 +515,8 @@
 
             <div class="photo-share-frame reveal reveal-up">
 
-                <p class="section-label">Capture the love</p>
-                <h2>Share a Photo</h2>
+                <p class="section-label" data-i18n="photo.label">Capture the love</p>
+                <h2 data-i18n="photo.title">Share a Photo</h2>
 
                 <div class="floral-divider" aria-hidden="true">
                     <span></span>
@@ -517,7 +526,7 @@
                     <span></span>
                 </div>
 
-                <p>
+                <p data-i18n="photo.text">
                     Have a sweet photo for us?
                     Send it on WhatsApp — we’d love to keep it.
                 </p>
@@ -527,7 +536,8 @@
                     id="photoShareBtn"
                     href="https://wa.me/251920289957?text=Congratulations%20Medhanit%20%26%20Samuel!%20Here%20is%20a%20photo%20wish%20for%20you."
                     target="_blank"
-                    rel="noopener noreferrer">
+                    rel="noopener noreferrer"
+                    data-i18n="photo.button">
                     Share Photo on WhatsApp
                 </a>
 
@@ -544,8 +554,8 @@
                 <div class="floral floral-corner floral-tl" aria-hidden="true"></div>
                 <div class="floral floral-corner floral-br" aria-hidden="true"></div>
 
-                <p class="section-label">With grateful hearts</p>
-                <h2>Thank You</h2>
+                <p class="section-label" data-i18n="thanks.label">With grateful hearts</p>
+                <h2 data-i18n="thanks.title">Thank You</h2>
 
                 <div class="floral-divider" aria-hidden="true">
                     <span></span>
@@ -555,10 +565,8 @@
                     <span></span>
                 </div>
 
-                <p>
-        
+                <p data-i18n="thanks.text">
                     Thank you for being part of our story.
-                   
                 </p>
 
             </div>
@@ -582,10 +590,11 @@
             </div>
 
             <h2 class="reveal">Medhanit &amp; Samuel</h2>
-            <p class="reveal">November 14, 2026</p>
+            <p class="reveal" data-i18n="footer.date">November 14, 2026</p>
             <div class="footer-heart" aria-hidden="true">♡</div>
-            <p class="footer-message reveal">
-                With love, until we celebrate together.            </p>
+            <p class="footer-message reveal" data-i18n="footer.message">
+                With love, until we celebrate together.
+            </p>
 
         </footer>
 

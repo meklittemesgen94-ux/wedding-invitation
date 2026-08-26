@@ -4,6 +4,304 @@
 
 
 /* =====================================================
+   LANGUAGE (English / Amharic)
+   ===================================================== */
+
+const LANG_KEY = "weddingLang";
+let currentLang = "en";
+
+const I18N = {
+    en: {
+        "gate.welcome": "You are warmly invited",
+        "gate.date": "November 14, 2026",
+        "gate.verse": '"He has made everything beautiful in its time."',
+        "gate.verseRef": "Ecclesiastes 3:11",
+        "gate.letterDate": "Nov 14, 2026",
+        "gate.tap": "Tap the envelope to open our invitation",
+        "gate.openAria": "Open invitation",
+        "hero.gettingMarried": "We are getting married",
+        "hero.date": "November 14, 2026 · Addis Ababa",
+        "hero.scrollAria": "Scroll to details",
+        "countdown.label": "The big day",
+        "countdown.title": "Counting Down to Forever",
+        "countdown.days": "Days",
+        "countdown.hours": "Hours",
+        "countdown.minutes": "Minutes",
+        "countdown.seconds": "Seconds",
+        "countdown.calendar": "Add to Calendar",
+        "story.label": "Our story",
+        "story.title": "Two Hearts, One Story",
+        "story.p1":
+            "Some stories are written in books, but ours was written in the little moments we shared together.",
+        "story.p2":
+            "From childhood playmates to this beautiful day, every moment has led us here.",
+        "story.p3":
+            "And now, we are ready to begin the next chapter of our forever with Jehovah.",
+        "story.verse":
+            "And now these three remain: faith, hope, and love. But the greatest of these is love.",
+        "story.verseRef": "1 Corinthians 13:13",
+        "details.label": "Join us",
+        "details.title": "Wedding Details",
+        "details.ceremony": "Wedding Ceremony",
+        "details.ceremonyPlace": "Addis Amba<br>JW Kingdom Hall",
+        "details.zoom": "Zoom Meeting",
+        "details.zoomInfo": "Zoom ID: 990 863 5436<br>Passcode: 303030",
+        "gallery.label": "Our moments",
+        "gallery.title": "Memories of Us",
+        "gallery.note":
+            "Swipe through a few favorite moments from our journey.",
+        "gallery.trackAria": "Photo gallery",
+        "gallery.prev": "Previous photo",
+        "gallery.next": "Next photo",
+        "gallery.goto": "Go to photo {n}",
+        "location.label": "Find us",
+        "location.title": "Wedding Location",
+        "location.address": "XQ68+MCP, Addis Ababa<br>Ethiopia",
+        "location.directions": "Get Directions",
+        "wishes.label": "From your hearts",
+        "wishes.title": "Guest Wishes",
+        "wishes.intro":
+            "Share a short blessing for Medhanit & Samuel — your words will appear here for everyone to see.",
+        "wishes.empty": "Be the first to leave a wish.",
+        "wishes.limit": "You can share one wish.",
+        "wishes.nameLabel": "Your name",
+        "wishes.messageLabel": "Your wish",
+        "wishes.namePlaceholder": "Your name",
+        "wishes.messagePlaceholder": "Write your wish for the couple...",
+        "wishes.send": "Send Wish",
+        "wishes.edit": "Edit",
+        "wishes.delete": "Delete",
+        "wishes.save": "Save",
+        "wishes.cancel": "Cancel",
+        "wishes.already": "Thank you — you’ve already shared your wish.",
+        "wishes.limitReached": "Limit reached",
+        "wishes.sending": "Sending your wish...",
+        "wishes.sent": "Thank you — your wish is now on the wall.",
+        "wishes.tooLong": "Please keep your wish a little shorter.",
+        "wishes.loadError": "Could not load wishes. Check Firestore rules.",
+        "wishes.firebaseError": "Could not load Firebase. Please refresh.",
+        "wishes.configError":
+            "Wishes are almost ready — add your Firebase config in script.js.",
+        "wishes.sendError": "Sorry, something went wrong. Please try again.",
+        "wishes.deleteConfirm": "Delete this wish?",
+        "wishes.editError":
+            "Could not edit this wish. Publish the latest Firestore rules.",
+        "wishes.deleteError":
+            "Could not delete this wish. Check Firestore rules.",
+        "wishes.emptyFields": "Name and wish cannot be empty.",
+        "photo.label": "Capture the love",
+        "photo.title": "Share a Photo",
+        "photo.text":
+            "Have a sweet photo for us? Send it on WhatsApp — we’d love to keep it.",
+        "photo.button": "Share Photo on WhatsApp",
+        "thanks.label": "With grateful hearts",
+        "thanks.title": "Thank You",
+        "thanks.text": "Thank you for being part of our story.",
+        "footer.date": "November 14, 2026",
+        "footer.message": "With love, until we celebrate together.",
+        "music.pause": "Pause music",
+        "music.play": "Play music",
+        "lang.group": "Language"
+    },
+    am: {
+        "gate.welcome": "በፍቅር ተጋብዘዋል",
+        "gate.date": " ህዳር 14፣ 2026",
+        "gate.verse": "«አምላክ ሁሉንም ነገር በወቅቱ ውብ አድርጎ ሠርቶታል።»",
+        "gate.verseRef": "መክብብ 3፡11",
+        "gate.letterDate": " ህዳር 14,2026",
+        "gate.tap": "ፖስታውን በመንካት ግብዣችንን ይክፈቱ",
+        "gate.openAria": "ግብዣውን ክፈት",
+        "hero.gettingMarried": ",We are getting married",
+        "hero.date": " ህዳር 14፣ 2026 · አዲስ አበባ",
+        "hero.scrollAria": "ወደ ዝርዝር ይሸብልሉ",
+        "countdown.label": "ትልቁ ቀን",
+        "countdown.title": "ወደ ዘላለም እየቆጠርን",
+        "countdown.days": "ቀናት",
+        "countdown.hours": "ሰዓታት",
+        "countdown.minutes": "ደቂቃዎች",
+        "countdown.seconds": "ሰከንዶች",
+        "countdown.calendar": "ወደ ቀን መቁጠሪያ ጨምር",
+        "story.label": "ታሪካችን",
+        "story.title": "ሁለት ልቦች፣ አንድ ታሪክ",
+        "story.p1":
+            "አንዳንድ ታሪኮች በመጻሕፍት ይጻፋሉ፤ የእኛ ግን አብረን ባሳለፍናቸው ትንንሽ ጊዜያት ተጽፏል።",
+        "story.p2":
+            "ከልጅነት ጓደኝነት እስከዚህ ውብ ቀን፣ እያንዳንዱ ጊዜ ወደዚህ መርቶናል።",
+        "story.p3":
+            "አሁንም ከይሖዋ ጋር የለዘላለም ቀጣይ ምዕራፍ ለመጀመር ዝግጁ ነን።",
+        "story.verse":
+            "ይሁን እንጂ እምነት፣ ተስፋ፣ ፍቅር፣ እነዚህ ሦስቱ ይቀጥላሉ፤ ከእነዚህ መካከል የሚበልጠው ግን ፍቅር ነው።",
+        "story.verseRef": "1ኛ ቆሮንቶስ 13፡13",
+        "details.label": "ከእኛ ጋር ይሁኑ",
+        "details.title": "የሰርግ ዝርዝር",
+        "details.ceremony": "የሰርግ ሥነ ሥርዓት",
+        "details.ceremonyPlace": "አዲስ አምባ<br>የይሖዋ ምሥክሮች የመንግሥት አዳራሽ",
+        "details.zoom": "የዙም ስብሰባ",
+        "details.zoomInfo": "የዙም መታወቂያ፡ 990 863 5436<br>የይለፍ ቃል፡ 303030",
+        "gallery.label": "ጊዜያቶቻችን",
+        "gallery.title": "ትውስታዎቻችን",
+        "gallery.note": "ከጉዞአችን የተወሰኑ ውድ ፎቶዎችን ያንሸራቱ።",
+        "gallery.trackAria": "የፎቶ ማእከል",
+        "gallery.prev": "ቀዳሚ ፎቶ",
+        "gallery.next": "ቀጣይ ፎቶ",
+        "gallery.goto": "ወደ ፎቶ {n} ሂድ",
+        "location.label": "ያግኙን",
+        "location.title": "የሰርግ ቦታ",
+        "location.address": "XQ68+MCP፣ አዲስ አበባ<br>ኢትዮጵያ",
+        "location.directions": "አቅጣጫ ያግኙ",
+        "wishes.label": "ከልባችሁ",
+        "wishes.title": "የእንግዶች ምኞት",
+        "wishes.intro":
+            "ለሜድሃኒት እና ሳሙኤል አጭር በረከት ያጋሩ — ቃላቶቻችሁ እዚህ ለሁሉም ይታያሉ።",
+        "wishes.empty": "የመጀመሪያው ምኞት እርስዎ ይሁኑ።",
+        "wishes.limit": "አንድ ምኞት ማጋራት ይችላሉ።",
+        "wishes.nameLabel": "ስምዎ",
+        "wishes.messageLabel": "ምኞትዎ",
+        "wishes.namePlaceholder": "ስምዎ",
+        "wishes.messagePlaceholder": "ለጥንዶቹ ምኞትዎን ይጻፉ...",
+        "wishes.send": "ምኞት ላክ",
+        "wishes.edit": "አርትዕ",
+        "wishes.delete": "ሰርዝ",
+        "wishes.save": "አስቀምጥ",
+        "wishes.cancel": "ይቅር",
+        "wishes.already": "አመሰግናለን — ምኞትዎን አስቀድመው አጋርተዋል።",
+        "wishes.limitReached": "ገደብ ተደርሷል",
+        "wishes.sending": "ምኞትዎ እየተላከ ነው...",
+        "wishes.sent": "አመሰግናለን — ምኞትዎ አሁን በግድግዳው ላይ ነው።",
+        "wishes.tooLong": "እባክዎ ምኞትዎን በትንሹ ያሳጥሩ።",
+        "wishes.loadError": "ምኞቶችን መጫን አልተቻለም።",
+        "wishes.firebaseError": "ፋየርቤዝ መጫን አልተቻለም። እባክዎ ያድሱ።",
+        "wishes.configError": "ምኞቶች በቅርብ ይዘጋጃሉ።",
+        "wishes.sendError": "ይቅርታ፣ ችግር ተፈጥሯል። እባክዎ እንደገና ይሞክሩ።",
+        "wishes.deleteConfirm": "ይህን ምኞት መሰረዝ ይፈልጋሉ?",
+        "wishes.editError": "ምኞቱን ማርትዕ አልተቻለም።",
+        "wishes.deleteError": "ምኞቱን መሰረዝ አልተቻለም።",
+        "wishes.emptyFields": "ስም እና ምኞት ባዶ መሆን አይችሉም።",
+        "photo.label": "ፍቅሩን ያስቀምጡ",
+        "photo.title": "ፎቶ ያጋሩ",
+        "photo.text":
+            "ውብ ፎቶ አለዎት? በዋትስአፕ ይላኩልን — ለማቆየት እንወዳለን።",
+        "photo.button": "በዋትስአፕ ፎቶ ያጋሩ",
+        "thanks.label": "በምስጋና ልብ",
+        "thanks.title": "እናመሰግናለን",
+        "thanks.text": "የታሪካችን አካል ስለሆናችሁ እናመሰግናለን።",
+        "footer.date": "ህዳር 14፣ 2026",
+        
+        "music.pause": "ሙዚቃ አቁም",
+        "music.play": "ሙዚቃ አጫውት",
+        "lang.group": "ቋንቋ"
+    }
+};
+
+function t(key) {
+    const table = I18N[currentLang] || I18N.en;
+    if (table[key] != null) {
+        return table[key];
+    }
+    if (I18N.en[key] != null) {
+        return I18N.en[key];
+    }
+    return key;
+}
+
+function applyLanguage(lang) {
+    currentLang = lang === "am" ? "am" : "en";
+
+    try {
+        localStorage.setItem(LANG_KEY, currentLang);
+    } catch (e) {
+        // ignore
+    }
+
+    document.documentElement.lang = currentLang === "am" ? "am" : "en";
+    document.body.classList.toggle("lang-am", currentLang === "am");
+
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+        const key = el.getAttribute("data-i18n");
+        if (key) {
+            el.textContent = t(key);
+        }
+    });
+
+    document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
+        const key = el.getAttribute("data-i18n-html");
+        if (key) {
+            el.innerHTML = t(key);
+        }
+    });
+
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(function (el) {
+        const key = el.getAttribute("data-i18n-placeholder");
+        if (key) {
+            el.setAttribute("placeholder", t(key));
+        }
+    });
+
+    document.querySelectorAll("[data-i18n-aria]").forEach(function (el) {
+        const key = el.getAttribute("data-i18n-aria");
+        if (key) {
+            el.setAttribute("aria-label", t(key));
+        }
+    });
+
+    const switcher = document.getElementById("langSwitch");
+    if (switcher) {
+        switcher.setAttribute("aria-label", t("lang.group"));
+        switcher.querySelectorAll(".lang-btn").forEach(function (btn) {
+            const active = btn.getAttribute("data-lang") === currentLang;
+            btn.classList.toggle("is-active", active);
+            btn.setAttribute("aria-pressed", active ? "true" : "false");
+        });
+    }
+
+    const musicToggle = document.getElementById("musicToggle");
+    if (musicToggle && !musicToggle.hidden) {
+        setMusicUI(musicPlaying);
+    }
+
+    const wishForm = document.getElementById("wishForm");
+    const wishStatus = document.getElementById("wishStatus");
+    const wishSubmit = document.getElementById("wishSubmit");
+    if (wishForm && wishStatus && wishSubmit) {
+        updateGuestFormAvailability(wishStatus, wishForm, wishSubmit);
+    }
+
+    const wall = document.getElementById("wishesWall");
+    const empty = document.getElementById("wishesEmpty");
+    if (wall && typeof lastWishDocs !== "undefined") {
+        paintWishesWall(wall, empty);
+    }
+}
+
+function initLanguage() {
+    let saved = "en";
+    try {
+        saved = localStorage.getItem(LANG_KEY) || "en";
+    } catch (e) {
+        saved = "en";
+    }
+
+    applyLanguage(saved === "am" ? "am" : "en");
+
+    const switcher = document.getElementById("langSwitch");
+    if (!switcher) {
+        return;
+    }
+
+    switcher.addEventListener("click", function (event) {
+        const btn = event.target.closest(".lang-btn");
+        if (!btn) {
+            return;
+        }
+        const lang = btn.getAttribute("data-lang");
+        if (lang && lang !== currentLang) {
+            applyLanguage(lang);
+        }
+    });
+}
+
+
+/* =====================================================
    OPENING INVITATION
    ===================================================== */
 
@@ -260,10 +558,10 @@ function setMusicUI(isPlaying) {
 
     if (isPlaying) {
         toggle.classList.add("is-playing");
-        toggle.setAttribute("aria-label", "Pause music");
+        toggle.setAttribute("aria-label", t("music.pause"));
     } else {
         toggle.classList.remove("is-playing");
-        toggle.setAttribute("aria-label", "Play music");
+        toggle.setAttribute("aria-label", t("music.play"));
     }
 }
 
@@ -506,10 +804,9 @@ function updateGuestFormAvailability(status, form, submit) {
         });
         status.hidden = false;
         status.className = "wish-status is-success";
-        status.textContent =
-            "Thank you — you’ve already shared your wish.";
+        status.textContent = t("wishes.already");
         if (submit) {
-            submit.textContent = "Limit reached";
+            submit.textContent = t("wishes.limitReached");
         }
     }
 }
@@ -531,14 +828,20 @@ function renderWishCard(wish) {
             : "") +
         "</p>" +
         '<div class="wish-card-actions">' +
-        '<button type="button" class="wish-edit-btn">Edit</button>' +
-        '<button type="button" class="wish-delete-btn">Delete</button>' +
+        '<button type="button" class="wish-edit-btn">' +
+        t("wishes.edit") +
+        "</button>" +
+        '<button type="button" class="wish-delete-btn">' +
+        t("wishes.delete") +
+        "</button>" +
         "</div>" +
         "</div>" +
         '<form class="wish-card-edit" hidden>' +
         '<label class="wish-label" for="edit-name-' +
         escapeHtml(wish.id) +
-        '">Name</label>' +
+        '">' +
+        t("wishes.nameLabel") +
+        "</label>" +
         '<input class="wish-input" id="edit-name-' +
         escapeHtml(wish.id) +
         '" type="text" maxlength="80" required value="' +
@@ -546,15 +849,21 @@ function renderWishCard(wish) {
         '">' +
         '<label class="wish-label" for="edit-msg-' +
         escapeHtml(wish.id) +
-        '">Wish</label>' +
+        '">' +
+        t("wishes.messageLabel") +
+        "</label>" +
         '<textarea class="wish-textarea" id="edit-msg-' +
         escapeHtml(wish.id) +
         '" rows="3" maxlength="500" required>' +
         escapeHtml(wish.message) +
         "</textarea>" +
         '<div class="wish-card-actions">' +
-        '<button type="submit" class="wish-save-btn">Save</button>' +
-        '<button type="button" class="wish-cancel-btn">Cancel</button>' +
+        '<button type="submit" class="wish-save-btn">' +
+        t("wishes.save") +
+        "</button>" +
+        '<button type="button" class="wish-cancel-btn">' +
+        t("wishes.cancel") +
+        "</button>" +
         "</div>" +
         "</form>";
 
@@ -618,7 +927,7 @@ function saveWishEdit(id, name, message) {
     const cleanMessage = String(message || "").trim();
 
     if (!cleanName || !cleanMessage) {
-        window.alert("Name and wish cannot be empty.");
+        window.alert(t("wishes.emptyFields"));
         return;
     }
 
@@ -631,10 +940,7 @@ function saveWishEdit(id, name, message) {
         })
         .catch(function (err) {
             const detail = err && err.message ? " " + err.message : "";
-            window.alert(
-                "Could not edit this wish. Publish the latest Firestore rules." +
-                    detail
-            );
+            window.alert(t("wishes.editError") + detail);
         });
 }
 
@@ -643,7 +949,7 @@ function deleteWish(id) {
         return;
     }
 
-    if (!window.confirm("Delete this wish?")) {
+    if (!window.confirm(t("wishes.deleteConfirm"))) {
         return;
     }
 
@@ -652,7 +958,7 @@ function deleteWish(id) {
         .doc(id)
         .delete()
         .catch(function () {
-            window.alert("Could not delete this wish. Check Firestore rules.");
+            window.alert(t("wishes.deleteError"));
         });
 }
 
@@ -692,15 +998,14 @@ function initFirebaseWishes() {
     if (!isFirebaseConfigured()) {
         status.hidden = false;
         status.className = "wish-status is-error";
-        status.textContent =
-            "Wishes will appear here once Firebase setup is finished.";
+        status.textContent = t("wishes.configError");
         return;
     }
 
     if (typeof firebase === "undefined") {
         status.hidden = false;
         status.className = "wish-status is-error";
-        status.textContent = "Could not load Firebase. Please refresh.";
+        status.textContent = t("wishes.firebaseError");
         return;
     }
 
@@ -732,8 +1037,7 @@ function initFirebaseWishes() {
             function () {
                 status.hidden = false;
                 status.className = "wish-status is-error";
-                status.textContent =
-                    "Could not load wishes. Check Firestore rules.";
+                status.textContent = t("wishes.loadError");
             }
         );
 
@@ -761,14 +1065,14 @@ function initFirebaseWishes() {
         if (name.length > 80 || message.length > 500) {
             status.hidden = false;
             status.className = "wish-status is-error";
-            status.textContent = "Please keep your wish a little shorter.";
+            status.textContent = t("wishes.tooLong");
             return;
         }
 
         submit.disabled = true;
         status.hidden = false;
         status.className = "wish-status";
-        status.textContent = "Sending your wish...";
+        status.textContent = t("wishes.sending");
 
         wishesDb
             .collection("wishes")
@@ -782,15 +1086,13 @@ function initFirebaseWishes() {
                 const next = used + 1;
                 setGuestWishCount(next);
                 status.className = "wish-status is-success";
-                status.textContent =
-                    "Thank you — your wish is now on the wall.";
+                status.textContent = t("wishes.sent");
                 form.reset();
                 updateGuestFormAvailability(status, form, submit);
             })
             .catch(function () {
                 status.className = "wish-status is-error";
-                status.textContent =
-                    "Sorry, something went wrong. Please try again.";
+                status.textContent = t("wishes.sendError");
             })
             .finally(function () {
                 submit.disabled = false;
@@ -856,7 +1158,10 @@ function initGalleryCarousel() {
         const dot = document.createElement("button");
         dot.type = "button";
         dot.className = "gallery-dot" + (index === 0 ? " is-active" : "");
-        dot.setAttribute("aria-label", "Go to photo " + (index + 1));
+        dot.setAttribute(
+            "aria-label",
+            t("gallery.goto").replace("{n}", String(index + 1))
+        );
         dot.addEventListener("click", function () {
             goTo(index);
         });
@@ -986,6 +1291,7 @@ function initAddToCalendar() {
    ===================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
+    initLanguage();
     createPetals();
     initWeddingMusic();
     initEnvelopeAccess();

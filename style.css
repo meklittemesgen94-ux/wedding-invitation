@@ -1032,6 +1032,75 @@ body:not(.wedding-page) {
     display: none !important;
 }
 
+
+.lang-switch {
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    z-index: 120;
+    display: inline-flex;
+    gap: 0;
+    border: 1px solid rgba(231, 197, 106, 0.55);
+    background: rgba(24, 40, 70, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    overflow: hidden;
+}
+
+
+.lang-btn {
+    border: none;
+    background: transparent;
+    color: rgba(255, 248, 235, 0.78);
+    font-family: 'Poppins', 'Noto Sans Ethiopic', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding: 9px 12px;
+    cursor: pointer;
+    min-width: 44px;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.lang-btn.is-active {
+    background: rgba(231, 197, 106, 0.28);
+    color: #fff8e8;
+}
+
+
+.lang-btn:hover {
+    color: #fff;
+}
+
+
+body.lang-am {
+    font-family: 'Noto Sans Ethiopic', 'Poppins', sans-serif;
+}
+
+
+body.lang-am .welcome,
+body.lang-am .section-label,
+body.lang-am .small-title,
+body.lang-am .guest,
+body.lang-am .story-text,
+body.lang-am .wishes-intro,
+body.lang-am .wish-card-message,
+body.lang-am .verse,
+body.lang-am .hero-date,
+body.lang-am .gate-date {
+    font-family: 'Noto Sans Ethiopic', 'Cormorant Garamond', serif;
+}
+
+
+body.lang-am .invite-card h1,
+body.lang-am .hero-content h1,
+body.lang-am .wish-card-name {
+    font-family: 'Great Vibes', cursive;
+}
+
 :root {
     color-scheme: light only;
     --navy: #263b5a;
@@ -3358,6 +3427,17 @@ footer p {
         width: 40px;
 
         height: 40px;
+    }
+
+    .lang-switch {
+        top: 12px;
+        left: 12px;
+    }
+
+    .lang-btn {
+        padding: 8px 10px;
+        font-size: 10px;
+        min-width: 40px;
     }
 
     .rsvp-frame {

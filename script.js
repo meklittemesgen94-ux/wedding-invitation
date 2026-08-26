@@ -115,7 +115,7 @@ const I18N = {
         "hero.date": " ህዳር 14፣ 2026 · አዲስ አበባ",
         "hero.scrollAria": "ወደ ዝርዝር ይሸብልሉ",
         "countdown.label": "ትልቁ ቀን",
-        "countdown.title": "ወደ ዘላለም እየቆጠርን",
+        "countdown.title": "ቀን እየቆጠርን",
         "countdown.days": "ቀናት",
         "countdown.hours": "ሰዓታት",
         "countdown.minutes": "ደቂቃዎች",
@@ -128,7 +128,7 @@ const I18N = {
         "story.p2":
             "ከልጅነት ጓደኝነት እስከዚህ ውብ ቀን፣ እያንዳንዱ ጊዜ ወደዚህ መርቶናል።",
         "story.p3":
-            "አሁንም ከይሖዋ ጋር የለዘላለም ቀጣይ ምዕራፍ ለመጀመር ዝግጁ ነን።",
+            "አሁንም ከይሖዋ ጋር የዘላለም ቀጣይ ምዕራፍ ለመጀመር ዝግጁ ነን።",
         "story.verse":
             "ይሁን እንጂ እምነት፣ ተስፋ፣ ፍቅር፣ እነዚህ ሦስቱ ይቀጥላሉ፤ ከእነዚህ መካከል የሚበልጠው ግን ፍቅር ነው።",
         "story.verseRef": "1ኛ ቆሮንቶስ 13፡13",
@@ -140,7 +140,7 @@ const I18N = {
         "details.zoomInfo": "የዙም መታወቂያ፡ 990 863 5436<br>የይለፍ ቃል፡ 303030",
         "gallery.label": "ጊዜያቶቻችን",
         "gallery.title": "ትውስታዎቻችን",
-        "gallery.note": "ከጉዞአችን የተወሰኑ ውድ ፎቶዎችን ያንሸራቱ።",
+        "gallery.note": "ከጉዞአችን የተወሰኑ ውድ ፎቶዎች",
         "gallery.trackAria": "የፎቶ ማእከል",
         "gallery.prev": "ቀዳሚ ፎቶ",
         "gallery.next": "ቀጣይ ፎቶ",
@@ -152,7 +152,7 @@ const I18N = {
         "wishes.label": "ከልባችሁ",
         "wishes.title": "የእንግዶች ምኞት",
         "wishes.intro":
-            "ለሜድሃኒት እና ሳሙኤል አጭር በረከት ያጋሩ — ቃላቶቻችሁ እዚህ ለሁሉም ይታያሉ።",
+            "ለመድሃኒት እና ሳሙኤል አጭር ምኞት ያጋሩ — ቃላቶቻችሁ እዚህ ለሁሉም ይታያሉ።",
         "wishes.empty": "የመጀመሪያው ምኞት እርስዎ ይሁኑ።",
         "wishes.limit": "አንድ ምኞት ማጋራት ይችላሉ።",
         "wishes.nameLabel": "ስምዎ",

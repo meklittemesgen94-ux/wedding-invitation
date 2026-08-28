@@ -111,11 +111,11 @@ const I18N = {
         "gate.letterDate": " ህዳር 14,2026",
         "gate.tap": "ፖስታውን በመንካት ግብዣችንን ይክፈቱ",
         "gate.openAria": "ግብዣውን ክፈት",
-        
+        "hero.gettingMarried": ",We are getting married",
         "hero.date": " ህዳር 14፣ 2026 · አዲስ አበባ",
         "hero.scrollAria": "ወደ ዝርዝር ይሸብልሉ",
         "countdown.label": "ትልቁ ቀን",
-        "countdown.title": "ቀን እየቆጠርን",
+        "countdown.title": "ወደ ዘላለም እየቆጠርን",
         "countdown.days": "ቀናት",
         "countdown.hours": "ሰዓታት",
         "countdown.minutes": "ደቂቃዎች",
@@ -128,7 +128,7 @@ const I18N = {
         "story.p2":
             "ከልጅነት ጓደኝነት እስከዚህ ውብ ቀን፣ እያንዳንዱ ጊዜ ወደዚህ መርቶናል።",
         "story.p3":
-            "አሁንም ከይሖዋ ጋር የዘላለም ቀጣይ ምዕራፍ ለመጀመር ዝግጁ ነን።",
+            "አሁንም ከይሖዋ ጋር የለዘላለም ቀጣይ ምዕራፍ ለመጀመር ዝግጁ ነን።",
         "story.verse":
             "ይሁን እንጂ እምነት፣ ተስፋ፣ ፍቅር፣ እነዚህ ሦስቱ ይቀጥላሉ፤ ከእነዚህ መካከል የሚበልጠው ግን ፍቅር ነው።",
         "story.verseRef": "1ኛ ቆሮንቶስ 13፡13",
@@ -140,7 +140,7 @@ const I18N = {
         "details.zoomInfo": "የዙም መታወቂያ፡ 990 863 5436<br>የይለፍ ቃል፡ 303030",
         "gallery.label": "ጊዜያቶቻችን",
         "gallery.title": "ትውስታዎቻችን",
-        "gallery.note": "ከጉዞአችን የተወሰኑ ውድ ፎቶዎች",
+        "gallery.note": "ከጉዞአችን የተወሰኑ ውድ ፎቶዎችን ያንሸራቱ።",
         "gallery.trackAria": "የፎቶ ማእከል",
         "gallery.prev": "ቀዳሚ ፎቶ",
         "gallery.next": "ቀጣይ ፎቶ",
@@ -152,7 +152,7 @@ const I18N = {
         "wishes.label": "ከልባችሁ",
         "wishes.title": "የእንግዶች ምኞት",
         "wishes.intro":
-            "ለመድሃኒት እና ሳሙኤል አጭር ምኞት ያጋሩ — ቃላቶቻችሁ እዚህ ለሁሉም ይታያሉ።",
+            "ለመድሃኒት እና ሳሙኤል አጭር በረከት ያጋሩ — ቃላቶቻችሁ እዚህ ለሁሉም ይታያሉ።",
         "wishes.empty": "የመጀመሪያው ምኞት እርስዎ ይሁኑ።",
         "wishes.limit": "አንድ ምኞት ማጋራት ይችላሉ።",
         "wishes.nameLabel": "ስምዎ",
@@ -375,10 +375,10 @@ function updateCountdown() {
     const now = new Date().getTime();
     const difference = weddingDate - now;
 
-    const days = document.getElementById("days");
-    const hours = document.getElementById("hours");
-    const minutes = document.getElementById("minutes");
-    const seconds = document.getElementById("seconds");
+        const days = document.getElementById("days");
+        const hours = document.getElementById("hours");
+        const minutes = document.getElementById("minutes");
+        const seconds = document.getElementById("seconds");
 
     if (!days || !hours || !minutes || !seconds) {
         return;

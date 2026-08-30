@@ -104,7 +104,7 @@ const I18N = {
         "lang.group": "Language"
     },
     am: {
-        "gate.welcome": "በፍቅር ተጋብዘዋል",
+        "gate.welcome": "በአክብሮት ተጋብዘዋል",
         "gate.date": " ህዳር 14፣ 2026",
         "gate.verse": "«አምላክ ሁሉንም ነገር በወቅቱ ውብ አድርጎ ሠርቶታል።»",
         "gate.verseRef": "መክብብ 3፡11",
@@ -115,7 +115,7 @@ const I18N = {
         "hero.date": " ህዳር 14፣ 2026 · አዲስ አበባ",
         "hero.scrollAria": "ወደ ዝርዝር ይሸብልሉ",
         "countdown.label": "ትልቁ ቀን",
-        "countdown.title": "ወደ ዘላለም እየቆጠርን",
+        "countdown.title": "ቀን እየቆጠርን",
         "countdown.days": "ቀናት",
         "countdown.hours": "ሰዓታት",
         "countdown.minutes": "ደቂቃዎች",
@@ -128,12 +128,12 @@ const I18N = {
         "story.p2":
             "ከልጅነት ጓደኝነት እስከዚህ ውብ ቀን፣ እያንዳንዱ ጊዜ ወደዚህ መርቶናል።",
         "story.p3":
-            "አሁንም ከይሖዋ ጋር የለዘላለም ቀጣይ ምዕራፍ ለመጀመር ዝግጁ ነን።",
+            "አሁንም ከይሖዋ ጋር የዘላለም ቀጣይ ምዕራፍ ለመጀመር ዝግጁ ነን።",
         "story.verse":
             "ይሁን እንጂ እምነት፣ ተስፋ፣ ፍቅር፣ እነዚህ ሦስቱ ይቀጥላሉ፤ ከእነዚህ መካከል የሚበልጠው ግን ፍቅር ነው።",
         "story.verseRef": "1ኛ ቆሮንቶስ 13፡13",
         "details.label": "ከእኛ ጋር ይሁኑ",
-        "details.title": "የሰርግ ዝርዝር",
+        "details.title": "ስለ ሰርጋችን",
         "details.ceremony": "የሰርግ ሥነ ሥርዓት",
         "details.ceremonyPlace": "አዲስ አምባ<br>የይሖዋ ምሥክሮች የመንግሥት አዳራሽ",
         "details.zoom": "የዙም ስብሰባ",
@@ -152,7 +152,7 @@ const I18N = {
         "wishes.label": "ከልባችሁ",
         "wishes.title": "የእንግዶች ምኞት",
         "wishes.intro":
-            "ለመድሃኒት እና ሳሙኤል አጭር በረከት ያጋሩ — ቃላቶቻችሁ እዚህ ለሁሉም ይታያሉ።",
+            "ለመድሃኒት እና ሳሙኤል አጭር ምኞት ያጋሩ — ቃላቶቻችሁ እዚህ ለሁሉም ይታያሉ።",
         "wishes.empty": "የመጀመሪያው ምኞት እርስዎ ይሁኑ።",
         "wishes.limit": "አንድ ምኞት ማጋራት ይችላሉ።",
         "wishes.nameLabel": "ስምዎ",
@@ -164,10 +164,10 @@ const I18N = {
         "wishes.delete": "ሰርዝ",
         "wishes.save": "አስቀምጥ",
         "wishes.cancel": "ይቅር",
-        "wishes.already": "አመሰግናለን — ምኞትዎን አስቀድመው አጋርተዋል።",
+        "wishes.already": "እናመሰግናለን — ምኞትዎን አስቀድመው አጋርተዋል።",
         "wishes.limitReached": "ገደብ ተደርሷል",
         "wishes.sending": "ምኞትዎ እየተላከ ነው...",
-        "wishes.sent": "አመሰግናለን — ምኞትዎ አሁን በግድግዳው ላይ ነው።",
+        "wishes.sent": "እናመሰግናለን — ምኞትዎ አሁን በግድግዳው ላይ ነው።",
         "wishes.tooLong": "እባክዎ ምኞትዎን በትንሹ ያሳጥሩ።",
         "wishes.loadError": "ምኞቶችን መጫን አልተቻለም።",
         "wishes.firebaseError": "ፋየርቤዝ መጫን አልተቻለም። እባክዎ ያድሱ።",
